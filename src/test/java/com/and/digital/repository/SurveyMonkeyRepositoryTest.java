@@ -33,6 +33,11 @@ class SurveyMonkeyRepositoryTest {
         assertEquals(getExpectedTestData().getBody(), classUnderTest.getSurveys());
     }
 
+    @Test
+    void getSurveys_errorReturned_success() {
+
+    }
+
     private ResponseEntity<SurveyMonkeyResponse> getExpectedTestData() {
         final SurveyMonkeyData surveyMonkeyData = new SurveyMonkeyData("306517922", "Onboarding Pathway 1 Evaluation");
         final SurveyMonkeyData surveyMonkeyData1 = new SurveyMonkeyData("306517987", "SOUTH 7th June ANDbootcamp - Week 1 Evaluation");
