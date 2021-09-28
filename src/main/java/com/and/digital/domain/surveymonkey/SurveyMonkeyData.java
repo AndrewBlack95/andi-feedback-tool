@@ -1,4 +1,4 @@
-package com.and.digital.domain.response;
+package com.and.digital.domain.surveymonkey;
 
 import lombok.Data;
 

@@ -1,7 +1,7 @@
 package com.and.digital.service;
 
 import com.and.digital.domain.dao.SurveyDao;
-import com.and.digital.domain.response.SurveyMonkeyData;
+import com.and.digital.domain.surveymonkey.SurveyMonkeyData;
 import com.and.digital.repository.SurveyMonkeyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
