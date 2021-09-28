@@ -1,0 +1,13 @@
+package com.and.digital;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AntiFeedbackToolApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AntiFeedbackToolApplication.class, args);
+	}
+
+}
