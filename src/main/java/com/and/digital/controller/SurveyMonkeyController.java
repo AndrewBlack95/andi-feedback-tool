@@ -1,6 +1,6 @@
 package com.and.digital.controller;
 
-import com.and.digital.domain.dao.SurveyDao;
+import com.and.digital.domain.surveymonkey.SurveyData;
 import com.and.digital.service.SurveyMonkeyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,7 +19,7 @@ public class SurveyMonkeyController {
     private final SurveyMonkeyService surveyMonkeyService;
 
     @GetMapping("/surveys")
-    public List<SurveyDao> getAllSurveys() {
+    public List<SurveyData> getAllSurveys() {
         log.info("Received request for all surveys");
         return surveyMonkeyService.getSurveys();
     }

@@ -1,6 +1,6 @@
 package com.and.digital.repository;
 
-import com.and.digital.domain.surveymonkey.SurveyMonkeyResponse;
+import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -15,9 +15,9 @@ public class SurveyMonkeyRepository {
 
     private final RestTemplate restTemplate;
 
-    public SurveyMonkeyResponse getSurveys() {
+    public GetAllSurveysResponse getSurveys() {
         try {
-            final ResponseEntity<SurveyMonkeyResponse> surveys = restTemplate.getForEntity("https://dummy/api/", SurveyMonkeyResponse.class);
+            final ResponseEntity<GetAllSurveysResponse> surveys = restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class);
             return surveys.getBody();
         } catch (final RestClientException e) {
             log.error("Exception from Survey Monkey:", e);

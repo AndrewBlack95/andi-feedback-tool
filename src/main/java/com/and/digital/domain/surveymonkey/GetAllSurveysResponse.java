@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class SurveyMonkeyResponse {
-    private List<SurveyMonkeyData> data;
+public class GetAllSurveysResponse {
+    private List<SurveyData> data;
 }
