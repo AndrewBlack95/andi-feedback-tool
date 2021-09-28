@@ -16,6 +16,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class SurveyMonkeyRepositoryTest {
@@ -29,8 +31,10 @@ class SurveyMonkeyRepositoryTest {
 
     @Test
     void getSurveys_responsesReturned_success() {
-        Mockito.when(mockRestTemplate.getForEntity("https://dummy/api/", SurveyMonkeyResponse.class)).thenReturn(getExpectedTestData());
+        when(mockRestTemplate.getForEntity("https://dummy/api/", SurveyMonkeyResponse.class)).thenReturn(getExpectedTestData());
         assertEquals(getExpectedTestData().getBody(), classUnderTest.getSurveys());
+
+        verify(mockRestTemplate).getForEntity("https://dummy/api/", SurveyMonkeyResponse.class);
     }
 
     @Test
