@@ -36,13 +36,14 @@ const Pages = ({ surveys, currentPage, setCurrentPage }) => {
     setCurrentPage(parseInt(event.target.innerHTML));
   }
 
-  return (
-    <StyledPageContainer>
-      {pageArray.map((page, index) => {
-        return <StyledPage key={`page_${index}`} selected={page===currentPage} onClick={handlePageChange}>{page}</StyledPage>
-      })}
-    </StyledPageContainer>
-  );
+  return pageArray.length > 0 
+    ? (
+      <StyledPageContainer>
+        {pageArray.map((page, index) => {
+          return <StyledPage key={`page_${index}`} selected={page===currentPage} onClick={handlePageChange}>{page}</StyledPage>
+        })}
+      </StyledPageContainer>
+    ) : null;
 }
 
 export default Pages;

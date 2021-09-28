@@ -14,7 +14,7 @@ const App = () => {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home"><HomePage token={token} setToken={setToken}/></Route>
+          <Route path="/home"><HomePage token={token} setToken={setToken} /></Route>
           <Route path="/survey"><SurveyPage /></Route>
           <Route path="/"><LogInPage /></Route>
         </Switch>
