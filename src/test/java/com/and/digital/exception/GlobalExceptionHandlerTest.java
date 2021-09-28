@@ -1,6 +1,5 @@
-package exception;
+package com.and.digital.exception;
 
-import com.and.digital.exception.GlobalExceptionHandler;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -24,6 +23,7 @@ class GlobalExceptionHandlerTest {
 
         final String expectedErrorMsg = String.format("401 %s", errorMsg);
         final ResponseEntity<String> result = classUnderTest.handleUnauthorizedException(ex);
+
         assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());
         assertEquals(expectedErrorMsg, result.getBody());
     }

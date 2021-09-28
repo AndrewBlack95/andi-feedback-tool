@@ -21,6 +21,6 @@ public class SurveyMonkeyController {
     @GetMapping("/surveys")
     public List<SurveyData> getAllSurveys() {
         log.info("Received request for all surveys");
-        return surveyMonkeyService.getSurveys();
+        return surveyMonkeyService.getAllSurveys();
     }
 }

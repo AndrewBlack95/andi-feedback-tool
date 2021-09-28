@@ -14,6 +14,7 @@ import java.util.List;
 
 import static com.and.digital.common.TestData.getExpectedSurveyData;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -28,15 +29,18 @@ class SurveyMonkeyControllerTest {
     @Test
     void getSurveys_responsesReturned_success() {
         final List<SurveyData> expectedSurveyData = getExpectedSurveyData();
-        when(mockSurveyMonkeyService.getSurveys()).thenReturn(expectedSurveyData);
+        when(mockSurveyMonkeyService.getAllSurveys()).thenReturn(expectedSurveyData);
+
         Assertions.assertEquals(expectedSurveyData, classUnderTest.getAllSurveys());
+        verifyNoMoreInteractions(mockSurveyMonkeyService);
     }
 
     @Test
     void getSurveys_serviceThrowsException_exceptionThrown() {
         final String errorMsg = "Error with request";
-        when(mockSurveyMonkeyService.getSurveys()).thenThrow(new RestClientException(errorMsg));
+        when(mockSurveyMonkeyService.getAllSurveys()).thenThrow(new RestClientException(errorMsg));
 
         assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveys(), errorMsg);
+        verifyNoMoreInteractions(mockSurveyMonkeyService);
     }
 }
