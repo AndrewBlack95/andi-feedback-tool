@@ -11,11 +11,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestClientException;
 
-import java.util.Collections;
 import java.util.List;
 
-import static com.and.digital.common.TestData.getExpectedGetAllSurveysResponses;
-import static com.and.digital.common.TestData.getExpectedSurveyData;
+import static com.and.digital.common.TestData.*;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -51,10 +49,9 @@ class SurveyMonkeyServiceTest {
 
     @Test
     void getAllSurveys_repositoryThrowsException_exceptionThrown() {
-        final String errorMsg = "Error with request";
-        when(mockSurveyMonkeyRepository.getAllSurveysResponse()).thenThrow(new RestClientException(errorMsg));
+        when(mockSurveyMonkeyRepository.getAllSurveysResponse()).thenThrow(new RestClientException(ERROR_MSG));
 
-        assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveys(), errorMsg);
+        assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveys(), ERROR_MSG);
         verifyNoMoreInteractions(mockSurveyMonkeyRepository);
     }
 }

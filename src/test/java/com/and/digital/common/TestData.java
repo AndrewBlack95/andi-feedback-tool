@@ -9,6 +9,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class TestData {
+
+    public static final String ERROR_MSG = "Error with request";
+
     public static ResponseEntity<GetAllSurveysResponse> getExpectedGetAllSurveysResponses() {
         final SurveyData surveyData = new SurveyData("306517922", "Onboarding Pathway 1 Evaluation");
         final SurveyData surveyData1 = new SurveyData("306517987", "SOUTH 7th June ANDbootcamp - Week 1 Evaluation");

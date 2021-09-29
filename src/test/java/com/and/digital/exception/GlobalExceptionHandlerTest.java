@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.HttpClientErrorException;
 
+import static com.and.digital.common.TestData.ERROR_MSG;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @ExtendWith(MockitoExtension.class)
@@ -18,10 +19,9 @@ class GlobalExceptionHandlerTest {
 
     @Test
     void handleUnauthorizedException_responseEntityReturned_success() {
-        final String errorMsg = "Unable to authenticate user";
-        final HttpClientErrorException.Unauthorized ex = (HttpClientErrorException.Unauthorized) HttpClientErrorException.Unauthorized.create(HttpStatus.UNAUTHORIZED, errorMsg, null, null, null);
+        final HttpClientErrorException.Unauthorized ex = (HttpClientErrorException.Unauthorized) HttpClientErrorException.Unauthorized.create(HttpStatus.UNAUTHORIZED, ERROR_MSG, null, null, null);
 
-        final String expectedErrorMsg = String.format("401 %s", errorMsg);
+        final String expectedErrorMsg = String.format("401 %s", ERROR_MSG);
         final ResponseEntity<String> result = classUnderTest.handleUnauthorizedException(ex);
 
         assertEquals(HttpStatus.UNAUTHORIZED, result.getStatusCode());

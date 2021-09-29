@@ -17,7 +17,7 @@ public class SurveyMonkeyRepository {
 
     public GetAllSurveysResponse getAllSurveysResponse() {
         try {
-            final ResponseEntity<GetAllSurveysResponse> surveys = restTemplate.getForEntity("https://api.surveymonkey.com/v3/surveys/", GetAllSurveysResponse.class);
+            final ResponseEntity<GetAllSurveysResponse> surveys = restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class);
             return surveys.getBody();
         } catch (final RestClientException e) {
             log.error("Exception from Survey Monkey:", e);
