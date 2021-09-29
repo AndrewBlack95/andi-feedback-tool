@@ -8,14 +8,15 @@ import com.and.digital.exception.TokenExchangeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import static com.and.digital.common.TestData.ERROR_MSG;
 import static com.and.digital.common.TestData.getExpectedGetAllSurveysResponses;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -57,6 +58,10 @@ class SurveyMonkeyRepositoryTest {
 
     @Test
     void getSurveys_errorReturned_exceptionThrown() {
+        when(mockRestTemplate.getForEntity("https://dummy/api/",
+                GetAllSurveysResponse.class)).thenThrow(new RestClientException(ERROR_MSG));
+        assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveysResponse(), ERROR_MSG);
+        verifyNoMoreInteractions(mockRestTemplate);
 
     }
 
