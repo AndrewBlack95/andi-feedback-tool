@@ -78,7 +78,7 @@ class CommonConfigTest {
         when(classUnderTest.getServletRequestAttributes()).thenReturn(null);
 
         assertEquals(StringUtils.EMPTY, classUnderTest.getBearerTokenFromRequest());
-        
+
         verify(classUnderTest).getServletRequestAttributes();
         verify(classUnderTest).getBearerTokenFromRequest();
         verifyNoMoreInteractions(classUnderTest);
