@@ -1,19 +1,32 @@
 package com.and.digital.config;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpHeaders;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+import static java.util.Objects.nonNull;
 
 @Configuration
 public class CommonConfig {
     @Bean
     public RestTemplate restTemplate(final RestTemplateBuilder builder) {
         return builder.additionalInterceptors((request, body, execution) -> {
-            //This will likely change to be an on request basis but putting it here for now to prove it out
-            request.getHeaders().add(HttpHeaders.AUTHORIZATION, "Bearer will be here ");
+            request.getHeaders().add(HttpHeaders.AUTHORIZATION, getBearerTokenFromRequest());
             return execution.execute(request, body);
         }).build();
+    }
+
+    String getBearerTokenFromRequest() {
+        final ServletRequestAttributes requestAttributes = getServletRequestAttributes();
+        return (nonNull(requestAttributes)) ? requestAttributes.getRequest().getHeader(HttpHeaders.AUTHORIZATION) : StringUtils.EMPTY;
+    }
+
+    ServletRequestAttributes getServletRequestAttributes() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes());
     }
 }

@@ -2,7 +2,6 @@ package com.and.digital.controller;
 
 import com.and.digital.domain.surveymonkey.SurveyData;
 import com.and.digital.service.SurveyMonkeyService;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -13,6 +12,7 @@ import org.springframework.web.client.RestClientException;
 import java.util.List;
 
 import static com.and.digital.common.TestData.getExpectedSurveyData;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -31,7 +31,7 @@ class SurveyMonkeyControllerTest {
         final List<SurveyData> expectedSurveyData = getExpectedSurveyData();
         when(mockSurveyMonkeyService.getAllSurveys()).thenReturn(expectedSurveyData);
 
-        Assertions.assertEquals(expectedSurveyData, classUnderTest.getAllSurveys());
+        assertEquals(expectedSurveyData, classUnderTest.getAllSurveys());
         verifyNoMoreInteractions(mockSurveyMonkeyService);
     }
 
