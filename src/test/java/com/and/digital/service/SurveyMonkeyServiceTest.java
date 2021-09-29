@@ -2,6 +2,7 @@ package com.and.digital.service;
 
 import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
 import com.and.digital.domain.surveymonkey.SurveyData;
+import com.and.digital.exception.TokenExchangeException;
 import com.and.digital.repository.SurveyMonkeyRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,8 +17,7 @@ import static com.and.digital.common.TestData.*;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SurveyMonkeyServiceTest {
@@ -53,5 +53,30 @@ class SurveyMonkeyServiceTest {
 
         assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveys(), ERROR_MSG);
         verifyNoMoreInteractions(mockSurveyMonkeyRepository);
+    }
+
+    @Test
+    void exchangeShortLivedTokenForBearer_exchangesToken() {
+
+        final String shortLivedToken = "a-token";
+        final String bearerToken = "bearer-token";
+
+        when(mockSurveyMonkeyRepository.exchangeShortLivedTokenForBearer(shortLivedToken))
+                .thenReturn(bearerToken);
+
+        String methodResponse = classUnderTest.exchangeShortLivedTokenForBearer(shortLivedToken);
+
+        assertEquals(methodResponse, bearerToken);
+    }
+
+    @Test
+    void exchangeShortLivedTokenForBearer__ThrowsTokenExchangeExceptionIfNotFound() {
+
+        final String shortLivedToken = "a-token";
+
+        when(mockSurveyMonkeyRepository.exchangeShortLivedTokenForBearer(shortLivedToken))
+                .thenThrow(new TokenExchangeException("Could not exchange tokens"));
+
+        assertThrows(TokenExchangeException.class, () -> classUnderTest.exchangeShortLivedTokenForBearer(shortLivedToken));
     }
 }

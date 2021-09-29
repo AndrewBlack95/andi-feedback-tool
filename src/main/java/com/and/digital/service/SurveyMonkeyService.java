@@ -22,4 +22,12 @@ public class SurveyMonkeyService {
         final List<SurveyData> surveys = getAllSurveysResponse.getData();
         return (nonNull(surveys) ? surveys : emptyList());
     }
+
+    public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {
+        return surveyMonkeyRepository.exchangeShortLivedTokenForBearer(shortLivedToken);
+    }
+
+    public String getLoginPage() {
+        return surveyMonkeyRepository.getLoginPage();
+    }
 }
