@@ -1,10 +1,12 @@
-package com.and.digital.domain.config;
+package com.and.digital.config;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.PropertySource;
 
 @Data
 @ConfigurationProperties(prefix="survey-monkey")
+@PropertySource("file:/opt/applications/SurveyMonkey.properties")
 public class SurveyMonkeyProperties {
     private String clientId;
     private String clientSecret;
