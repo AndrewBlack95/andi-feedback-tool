@@ -33,7 +33,7 @@ const Survey = styled.div`
   }
 `;
 
-const SurveyList = ({ surveys = [], currentPage = 0, setSelectedSurvey }) => {
+const SurveyList = ({ surveys = [], currentPage = 0, setSelectedSurvey, loading = true }) => {
   const history = useHistory();
 
   const startIndex = (currentPage - 1) * SURVEYS_PER_PAGE;
@@ -45,12 +45,15 @@ const SurveyList = ({ surveys = [], currentPage = 0, setSelectedSurvey }) => {
     history.push('/survey');
   }
 
-  return surveys.length > 0
-    ? (
+  return (
+    (loading && <></>)
+    || (surveys.length === 0 && <ErrorMessage>Sorry, you don't appear to have any surveys available</ErrorMessage>)
+    || (
       <SurveysContainer>
         {surveysForCurrentPage.map((survey, index) => <Survey key={`survey_${index}`} onClick={() => handleSelectSurvey(survey)}>{survey.title}</Survey>)}
       </SurveysContainer>
-    ) : <ErrorMessage>Sorry, you don't appear to have any surveys available</ErrorMessage>
+    )
+  )
 };
 
 export default SurveyList;
