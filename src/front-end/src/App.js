@@ -9,13 +9,14 @@ import SurveyPage from './pages/SurveyPage';
 
 const App = () => {
   const [token, setToken] = useState(null);
+  const [selectedSurvey, setSelectedSurvey] = useState(null);
 
   return (
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home"><HomePage token={token} setToken={setToken} /></Route>
-          <Route path="/survey"><SurveyPage /></Route>
+          <Route path="/home"><HomePage token={token} setToken={setToken} setSelectedSurvey={setSelectedSurvey} /></Route>
+          <Route path="/survey"><SurveyPage setToken={setToken} selectedSurvey={selectedSurvey} /></Route>
           <Route path="/"><LogInPage /></Route>
         </Switch>
       </div>

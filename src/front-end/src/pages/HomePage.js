@@ -8,7 +8,7 @@ import WelcomeMessage from '../components/WelcomeMessage';
 
 import getSurveys from '../api/get-surveys';
 
-const HomePage = ({ token, setToken }) => {
+const HomePage = ({ token, setToken, setSelectedSurvey }) => {
   const [surveys, setSurveys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -21,7 +21,7 @@ const HomePage = ({ token, setToken }) => {
       <NavBar setToken={setToken}/>
       <MainSection>
         <WelcomeMessage />
-        <SurveyList surveys={surveys} currentPage={currentPage} />
+        <SurveyList surveys={surveys} currentPage={currentPage} setSelectedSurvey={setSelectedSurvey} />
         <Pages surveys={surveys} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </MainSection>
     </>
