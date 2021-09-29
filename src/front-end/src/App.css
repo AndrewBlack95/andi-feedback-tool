@@ -1,0 +1,9 @@
+:root {
+  --primaryBackgroundColor: #2897FF;
+  --primaryFontColor: white;
+  --topNavigationHeight: 56px;
+}
+
+.App {
+  font-family: 'Poppins', sans-serif;
+}
