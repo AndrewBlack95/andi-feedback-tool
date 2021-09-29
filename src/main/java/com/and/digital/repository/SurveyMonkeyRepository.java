@@ -31,7 +31,7 @@ public class SurveyMonkeyRepository {
         }
     }
 
-    public String exchangeShortLivedTokenForBearer(String shortLivedToken) {
+    public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
