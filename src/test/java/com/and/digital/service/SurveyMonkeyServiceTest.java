@@ -3,7 +3,6 @@ package com.and.digital.service;
 import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
 import com.and.digital.domain.surveymonkey.SurveyData;
 import com.and.digital.repository.SurveyMonkeyRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -15,6 +14,7 @@ import java.util.List;
 
 import static com.and.digital.common.TestData.*;
 import static java.util.Collections.emptyList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
@@ -33,7 +33,7 @@ class SurveyMonkeyServiceTest {
         final List<SurveyData> expectedSurveyData = getExpectedSurveyData();
         when(mockSurveyMonkeyRepository.getAllSurveysResponse()).thenReturn(getExpectedGetAllSurveysResponses().getBody());
 
-        Assertions.assertEquals(expectedSurveyData, classUnderTest.getAllSurveys());
+        assertEquals(expectedSurveyData, classUnderTest.getAllSurveys());
         verifyNoMoreInteractions(mockSurveyMonkeyRepository);
     }
 
@@ -42,7 +42,7 @@ class SurveyMonkeyServiceTest {
         final GetAllSurveysResponse getAllSurveysResponseWithNoSurveys = new GetAllSurveysResponse();
         when(mockSurveyMonkeyRepository.getAllSurveysResponse()).thenReturn(getAllSurveysResponseWithNoSurveys);
 
-        Assertions.assertEquals(emptyList(), classUnderTest.getAllSurveys());
+        assertEquals(emptyList(), classUnderTest.getAllSurveys());
         verifyNoMoreInteractions(mockSurveyMonkeyRepository);
 
     }
