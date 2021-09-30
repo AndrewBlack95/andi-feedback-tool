@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 
 import ErrorMessage from './ErrorMessage';
 
@@ -32,17 +33,27 @@ const Survey = styled.div`
   }
 `;
 
-const SurveyList = ({ surveys = [], currentPage = 0 }) => {
+const SurveyList = ({ surveys = [], currentPage = 0, setSelectedSurvey, loading = true }) => {
+  const history = useHistory();
+
   const startIndex = (currentPage - 1) * SURVEYS_PER_PAGE;
   const endIndex = (currentPage * SURVEYS_PER_PAGE);
   const surveysForCurrentPage = surveys.slice(startIndex, endIndex);
 
-  return surveys.length > 0
-    ? (
+  const handleSelectSurvey = (survey) => {
+    setSelectedSurvey(survey);
+    history.push('/survey');
+  }
+
+  return (
+    (loading && <></>)
+    || (surveys.length === 0 && <ErrorMessage>Sorry, you don't appear to have any surveys available</ErrorMessage>)
+    || (
       <SurveysContainer>
-        {surveysForCurrentPage.map((survey, index) => <Survey key={`survey_${index}`}>{survey.title}</Survey>)}
+        {surveysForCurrentPage.map((survey, index) => <Survey key={`survey_${index}`} onClick={() => handleSelectSurvey(survey)}>{survey.title}</Survey>)}
       </SurveysContainer>
-    ) : <ErrorMessage>Sorry, you don't appear to have any surveys available</ErrorMessage>
+    )
+  )
 };
 
 export default SurveyList;

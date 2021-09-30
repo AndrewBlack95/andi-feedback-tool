@@ -8,20 +8,26 @@ import WelcomeMessage from '../components/WelcomeMessage';
 
 import getSurveys from '../api/get-surveys';
 
-const HomePage = ({ token, setToken }) => {
+const HomePage = ({ token, setToken, setSelectedSurvey }) => {
   const [surveys, setSurveys] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(true);
   
   useEffect(() => {
-    getSurveys(token).then(surveys => setSurveys(surveys));
+    getSurveys(token)
+      .then(surveys => {
+        setSurveys(surveys)
+        setLoading(false)
+      })
   }, [token, setSurveys]);
 
   return (
     <>
+      
       <NavBar setToken={setToken}/>
       <MainSection>
         <WelcomeMessage />
-        <SurveyList surveys={surveys} currentPage={currentPage} />
+        <SurveyList surveys={surveys} currentPage={currentPage} setSelectedSurvey={setSelectedSurvey} loading={loading}/>
         <Pages surveys={surveys} currentPage={currentPage} setCurrentPage={setCurrentPage} />
       </MainSection>
     </>
