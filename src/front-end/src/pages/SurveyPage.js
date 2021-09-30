@@ -36,14 +36,16 @@ const mockTags = {
 const SurveyPage = ({ token, setToken, selectedSurvey }) => {
   const history = useHistory();
 
+  const [loading, setLoading] = useState(true);
   const [survey, setSurvey] = useState(null);
 
   useEffect(() => {
     getSurveyDetails(token, selectedSurvey?.id)
       .then(survey => {
         setSurvey(survey)
+        setLoading(false);
       })
-  })
+  }, [token, selectedSurvey, setSurvey]);
 
   if (!selectedSurvey) {
     history.push('/home');
@@ -57,7 +59,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey }) => {
           <BackButton />
           <AvailableTags tags={mockTags} />
         </SidePanel>
-        <SurveyLayout survey={survey} />
+        <SurveyLayout survey={survey} loading={loading} />
       </MainSection>
     </>
   )

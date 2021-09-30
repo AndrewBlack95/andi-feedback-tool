@@ -14,7 +14,7 @@ const SurveysContainer = styled.div`
 
 const Survey = styled.div`
   align-items: center;
-  background-color: #f2f2f2;
+  background-color: var(--primaryGreyColor);
   border-radius: 3px;
   box-sizing: border-box;
   display: flex;
@@ -28,7 +28,7 @@ const Survey = styled.div`
   }
 
   &:hover {
-    background-color: #e5e5e5;
+    background-color: var(--secondaryGreyColor);
     cursor: pointer;
   }
 `;

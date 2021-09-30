@@ -4,11 +4,21 @@
 }
 
 :root {
-  --primaryBackgroundColor: #2897FF;
-  --primaryFontColor: white;
   --topNavigationHeight: 56px;
+
+  --primaryBlueColor: #2897FF;
+  --primaryRedColor: #FF323C;
+  --primaryYellowColor: #FFC800;
+  --primaryGreenColor: #5AC328;
+
+  --primaryGreyColor: #F2F2F2;
+  --secondaryGreyColor: #E5E5E5;
+
+  --primaryBlackColor: #323232;
+  --primaryWhiteColor: #FFFFFF;
 }
 
 .App {
   font-family: 'BrownPro-Regular', 'Poppins', sans-serif;
+  color: var(--primaryBlackColor);
 }

@@ -9,7 +9,7 @@ const StyledAvailableTagsHeading = styled.h2`
 `;
 
 const StyledAvailableTagsContainer = styled.div`
-  background-color: #f2f2f2;
+  background-color: var(--primaryGreyColor);
   border-radius: 3px;
   box-sizing: border-box;
   display: flex;
@@ -19,15 +19,15 @@ const StyledAvailableTagsContainer = styled.div`
 `;
 
 const StyledAvailableTagsLine = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   height: 32px;
   line-height: 22px;
   padding: 5px;
 `;
 
 const StyledAddNewTag = styled.a`
-  background-color: var(--primaryBackgroundColor);
-  color: white;
+  background-color: var(--primaryBlueColor);
+  color: var(--primaryWhiteColor);
   border-radius: 3px;
   font-size: 12px;
   font-weight: 700;
@@ -37,8 +37,8 @@ const StyledAddNewTag = styled.a`
   right: 0;
 
   &:hover {
-    background-color: var(--primaryBackgroundColor);
-    color: white;
+    background-color: var(--primaryBlueColor);
+    color: var(--primaryWhiteColor);
     cursor: pointer;
   }
 `;
@@ -52,8 +52,8 @@ const AvailableTags = ({ tags }) => {
       <StyledAvailableTagsContainer>
         {tagNames.map(tagName => {
           return (
-            <StyledAvailableTagsLine>
-              <Tag tag={tags[tagName]}>{tagName}</Tag>
+            <StyledAvailableTagsLine key={`tagLine_${tagName}`}>
+              <Tag key={`tag_${tagName}`} tag={tags[tagName]}>{tagName}</Tag>
             </StyledAvailableTagsLine>
           )
         })}
