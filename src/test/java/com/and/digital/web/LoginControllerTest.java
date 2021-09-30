@@ -49,7 +49,7 @@ class LoginControllerTest {
         when(service.exchangeShortLivedTokenForBearer(shortLivedCode))
                 .thenReturn(longLivedCode);
 
-        ResponseEntity<String> result = controllerUnderTest.exchangeTokens(request);
+        ResponseEntity<String> result = controllerUnderTest.exchangeTokens(shortLivedCode);
 
         assertThat(result.getStatusCode(), is(HttpStatus.OK));
         assertThat(result.getBody(), is(longLivedCode));
@@ -61,7 +61,7 @@ class LoginControllerTest {
         final MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("code", shortLivedCode);
 
-        assertThrows(TokenExchangeException.class, () -> controllerUnderTest.exchangeTokens(request), ERROR_MSG);
+        assertThrows(TokenExchangeException.class, () -> controllerUnderTest.exchangeTokens(shortLivedCode), ERROR_MSG);
     }
 
     @Test
@@ -70,6 +70,6 @@ class LoginControllerTest {
         final MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("code", shortLivedCode);
 
-        assertThrows(TokenExchangeException.class, () -> controllerUnderTest.exchangeTokens(request), ERROR_MSG);
+        assertThrows(TokenExchangeException.class, () -> controllerUnderTest.exchangeTokens(shortLivedCode), ERROR_MSG);
     }
 }
