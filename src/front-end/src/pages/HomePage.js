@@ -23,7 +23,6 @@ const HomePage = ({ token, setToken, setSelectedSurvey }) => {
 
   return (
     <>
-      
       <NavBar setToken={setToken}/>
       <MainSection>
         <WelcomeMessage />

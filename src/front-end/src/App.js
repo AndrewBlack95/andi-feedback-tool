@@ -16,7 +16,7 @@ const App = () => {
       <div className="App">
         <Switch>
           <Route path="/home"><HomePage token={token} setToken={setToken} setSelectedSurvey={setSelectedSurvey} /></Route>
-          <Route path="/survey"><SurveyPage setToken={setToken} selectedSurvey={selectedSurvey} /></Route>
+          <Route path="/survey"><SurveyPage token={token} setToken={setToken} selectedSurvey={selectedSurvey} /></Route>
           <Route path="/"><LogInPage /></Route>
         </Switch>
       </div>

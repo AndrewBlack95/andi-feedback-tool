@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 const ErrorMessage = styled.div`
-  background-color: #f2f2f2;
+  background-color: var(--primaryGreyColor);
   border-radius: 3px;
+  color: var(--primaryRedColor);
   padding: 20px;
-  font-weight: 700;
-  color: red;
 `;
 
 export default ErrorMessage;
