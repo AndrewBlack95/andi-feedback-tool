@@ -1,4 +1,4 @@
-package com.and.digital.domain.surveymonkey;
+package com.and.digital.domain.surveymonkey.dao;
 
 import lombok.Data;
 

@@ -1,7 +1,8 @@
 package com.and.digital.controller;
 
-import com.and.digital.domain.surveymonkey.SurveyData;
+import com.and.digital.domain.surveymonkey.dao.SurveyData;
 import com.and.digital.service.SurveyMonkeyService;
+import com.and.digital.web.SurveyMonkeyController;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

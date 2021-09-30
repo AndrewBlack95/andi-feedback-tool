@@ -1,8 +1,9 @@
-package com.and.digital.domain.surveymonkey;
+package com.and.digital.domain.surveymonkey.dao;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -13,6 +14,8 @@ public class SurveyDetails {
     private final int questionCount;
     @JsonProperty("response_count")
     private final int responseCount;
-    private final List<SurveyQuestions> questions;
+    @JsonProperty("date_created")
+    private LocalDateTime dateCreated;
+    private List<SurveyPage> pages;
 
 }

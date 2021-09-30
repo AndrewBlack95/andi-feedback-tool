@@ -1,10 +1,12 @@
-package com.and.digital.controller;
+package com.and.digital.web;
 
-import com.and.digital.domain.surveymonkey.SurveyData;
+import com.and.digital.domain.surveymonkey.dao.SurveyData;
+import com.and.digital.domain.surveymonkey.dto.SurveyResponseDto;
 import com.and.digital.service.SurveyMonkeyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,9 +26,9 @@ public class SurveyMonkeyController {
         return surveyMonkeyService.getAllSurveys();
     }
 
-    //@GetMapping("/questions/{surveyId}")
-    //public List<Object> getQuestionsWithResponses() {
-    //    log.info("Recevied request for all questions with responses");
-
-    //}
+    @GetMapping("/survey-details/{surveyId}")
+    public SurveyResponseDto getSurveyDetailsWithResponses(@PathVariable final String surveyId) {
+        log.info("Received request for all responses with questions");
+        return surveyMonkeyService.getResponsesForSurvey(surveyId);
+    }
 }

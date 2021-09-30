@@ -1,8 +1,10 @@
 package com.and.digital.repository;
 
 import com.and.digital.config.SurveyMonkeyProperties;
-import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
-import com.and.digital.domain.surveymonkey.SurveyMonkeyBearerTokenResponse;
+import com.and.digital.domain.surveymonkey.dao.GetAllSurveysResponse;
+import com.and.digital.domain.surveymonkey.dao.GetSurveyResponses;
+import com.and.digital.domain.surveymonkey.dao.SurveyDetails;
+import com.and.digital.domain.surveymonkey.dao.SurveyMonkeyBearerTokenResponse;
 import com.and.digital.exception.TokenExchangeException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,8 +15,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import java.util.function.Supplier;
+
+import static java.util.Objects.nonNull;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -25,47 +28,36 @@ public class SurveyMonkeyRepository {
     private final SurveyMonkeyProperties properties;
 
     public GetAllSurveysResponse getAllSurveysResponse() {
-        return test(() -> restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class));
+        return handleRestRequest(() -> restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class));
     }
 
-    public Object getSurveyDetails(final String id) {
-        return test(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/details", id), Object.class));
+    public SurveyDetails getSurveyDetails(final String id) {
+        return handleRestRequest(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/details", id), SurveyDetails.class));
     }
 
-    @PostConstruct
-    public void test1() {
-
-        getSurveyDetails("311314769");
+    public GetSurveyResponses getIndividualSurveyResponses(final String id) {
+        return handleRestRequest(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/responses/bulk", id), GetSurveyResponses.class));
     }
 
-    public <T> T test(final Supplier<ResponseEntity<T>> restFunction) {
-        try {
-            final ResponseEntity<T> surveys = restFunction.get();
-            return surveys.getBody();
-        } catch (final RestClientException e) {
-            log.error("Exception from Survey Monkey:", e);
-            throw e;
-        }
-    }
 
     public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {
 
-        HttpHeaders headers = new HttpHeaders();
+        final HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
 
-        MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
+        final MultiValueMap<String, String> map = new LinkedMultiValueMap<>();
         map.add("client_id", properties.getClientId());
         map.add("client_secret", properties.getClientSecret());
         map.add("code", shortLivedToken);
         map.add("redirect_uri", properties.getSuccessfulLoginRedirectUri());
         map.add("grant_type", properties.getGrantType());
 
-        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
+        final HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(map, headers);
 
-        ResponseEntity<SurveyMonkeyBearerTokenResponse> response = restTemplate.exchange(properties.getOAuthTokenUrl(), HttpMethod.POST, entity, SurveyMonkeyBearerTokenResponse.class);
+        final SurveyMonkeyBearerTokenResponse response = handleRestRequest(() -> restTemplate.exchange(properties.getOAuthTokenUrl(), HttpMethod.POST, entity, SurveyMonkeyBearerTokenResponse.class));
 
-        if (hasOKResponseWithBody(response)) {
-            final String bearerToken = response.getBody().getAccessToken();
+        if (nonNull(response)) {
+            final String bearerToken = response.getAccessToken();
 
             if (bearerToken != null && !bearerToken.isEmpty()) {
                 return bearerToken;
@@ -73,6 +65,16 @@ public class SurveyMonkeyRepository {
         }
 
         throw new TokenExchangeException("Could not exchange short lived token for bearer token");
+    }
+
+    public <T> T handleRestRequest(final Supplier<ResponseEntity<T>> restFunction) {
+        try {
+            final ResponseEntity<T> surveys = restFunction.get();
+            return surveys.getBody();
+        } catch (final RestClientException e) {
+            log.error("Exception from Survey Monkey:", e);
+            throw e;
+        }
     }
 
     public String getLoginPage() {
@@ -90,9 +92,5 @@ public class SurveyMonkeyRepository {
                 .append("&")
                 .append(String.format("redirect_uri=%s", properties.getLoginRedirectUri()))
                 .toString();
-    }
-
-    private boolean hasOKResponseWithBody(ResponseEntity<SurveyMonkeyBearerTokenResponse> response) {
-        return response.getStatusCode().equals(HttpStatus.OK) && response.getBody() != null;
     }
 }

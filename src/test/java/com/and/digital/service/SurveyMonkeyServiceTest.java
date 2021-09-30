@@ -1,7 +1,7 @@
 package com.and.digital.service;
 
-import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
-import com.and.digital.domain.surveymonkey.SurveyData;
+import com.and.digital.domain.surveymonkey.dao.GetAllSurveysResponse;
+import com.and.digital.domain.surveymonkey.dao.SurveyData;
 import com.and.digital.exception.TokenExchangeException;
 import com.and.digital.repository.SurveyMonkeyRepository;
 import org.junit.jupiter.api.Test;
