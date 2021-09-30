@@ -57,17 +57,14 @@ public class SurveyMonkeyService {
                     .stream()
                     .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
 
-
             if (nonNull(answerMapper)) {
-                final List<AnswerDto> answersFromAllResponse = questionInfoResponses.stream()
+                final List<AnswerDto> answersFromResponses = questionInfoResponses.stream()
                         .map(Question::getAnswers)
-                        .flatMap(Collection::stream)
-                        .filter(Objects::nonNull)
                         .map(e -> answerMapper.mapResponse(e, questionFromDetails))
                         .collect(Collectors.toList());
 
                 final String heading = getHeading(questionFromDetails);
-                questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromAllResponse));
+                questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromResponses));
             }
         }
         surveyResponse.setQuestions(questionResponses);

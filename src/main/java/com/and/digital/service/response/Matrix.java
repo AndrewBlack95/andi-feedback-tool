@@ -8,21 +8,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 @Component
-public class OpenEnded implements AnswerMapper {
+public class Matrix implements AnswerMapper {
 
     @Override
     public AnswerDto mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question) {
-        if (answersFromResponses.isEmpty()) {
-            return new AnswerDto();
-        }
-        final SurveyAnswer surveyAnswer = answersFromResponses.get(0);
         final AnswerDto answerDto = new AnswerDto();
-        answerDto.setValue(surveyAnswer.getText());
         return answerDto;
     }
 
     @Override
     public QuestionType getQuestionType() {
-        return QuestionType.OPEN_ENDED;
+        return QuestionType.MATRIX;
     }
 }
