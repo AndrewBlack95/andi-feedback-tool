@@ -1,6 +1,6 @@
 package com.and.digital.domain;
 
-import com.and.digital.domain.config.SurveyMonkeyProperties;
+import com.and.digital.config.SurveyMonkeyProperties;
 import lombok.Data;
 import org.junit.jupiter.api.Test;
 
