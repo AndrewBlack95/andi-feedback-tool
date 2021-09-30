@@ -13,6 +13,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.annotation.PostConstruct;
+import java.util.function.Supplier;
+
 @Slf4j
 @RequiredArgsConstructor
 @Repository
@@ -22,8 +25,22 @@ public class SurveyMonkeyRepository {
     private final SurveyMonkeyProperties properties;
 
     public GetAllSurveysResponse getAllSurveysResponse() {
+        return test(() -> restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class));
+    }
+
+    public Object getSurveyDetails(final String id) {
+        return test(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/details", id), Object.class));
+    }
+
+    @PostConstruct
+    public void test1() {
+
+        getSurveyDetails("311314769");
+    }
+
+    public <T> T test(final Supplier<ResponseEntity<T>> restFunction) {
         try {
-            final ResponseEntity<GetAllSurveysResponse> surveys = restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class);
+            final ResponseEntity<T> surveys = restFunction.get();
             return surveys.getBody();
         } catch (final RestClientException e) {
             log.error("Exception from Survey Monkey:", e);
