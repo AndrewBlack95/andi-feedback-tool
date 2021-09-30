@@ -58,12 +58,7 @@ public class SurveyMonkeyRepository {
         throw new TokenExchangeException("Could not exchange short lived token for bearer token");
     }
 
-    public String getLoginPage() {
-        final String url = loginPageUrl();
-        return restTemplate.getForObject(url, String.class);
-    }
-
-    private String loginPageUrl() {
+    public String buildLoginURL() {
         return new StringBuilder()
                 .append(properties.getOAuthUrl())
                 .append("?")
