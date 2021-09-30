@@ -39,7 +39,6 @@ public class SurveyMonkeyRepository {
         return handleRestRequest(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/responses/bulk", id), GetSurveyResponses.class));
     }
 
-
     public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {
 
         final HttpHeaders headers = new HttpHeaders();

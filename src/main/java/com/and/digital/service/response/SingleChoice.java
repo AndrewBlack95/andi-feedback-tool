@@ -6,7 +6,7 @@ import com.and.digital.domain.surveymonkey.dto.AnswerDto;
 import org.springframework.stereotype.Component;
 
 @Component
-public class OpenEnded implements AnswerMapper {
+public class SingleChoice implements AnswerMapper {
 
     @Override
     public AnswerDto mapResponse(final SurveyAnswer answerFromResponses, final Question question) {
@@ -17,6 +17,6 @@ public class OpenEnded implements AnswerMapper {
 
     @Override
     public QuestionType getQuestionType() {
-        return QuestionType.OPEN_ENDED;
+        return QuestionType.SINGLE_CHOICE;
     }
 }

@@ -8,6 +8,7 @@ import com.and.digital.repository.SurveyMonkeyRepository;
 import com.and.digital.service.response.AnswerMapper;
 import com.and.digital.service.response.QuestionType;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -41,7 +42,6 @@ public class SurveyMonkeyService {
     public SurveyResponseDto getResponsesForSurvey(final String surveyId) {
         final Set<Question> surveyQuestionsFromResponse = getQuestionsFromResponses(surveyId);
 
-
         final SurveyDetails surveyDetails = surveyMonkeyRepository.getSurveyDetails(surveyId);
         final Set<Question> surveyQuestionsFromDetails = getQuestionsFromDetails(surveyDetails);
 
@@ -57,23 +57,22 @@ public class SurveyMonkeyService {
                     .stream()
                     .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
 
-            if (nonNull(answerMapper)) {
 
+            if (nonNull(answerMapper)) {
                 final List<AnswerDto> answersFromAllResponse = questionInfoResponses.stream()
                         .map(Question::getAnswers)
                         .flatMap(Collection::stream)
                         .filter(Objects::nonNull)
-                        .map(answerMapper::mapResponse)
+                        .map(e -> answerMapper.mapResponse(e, questionFromDetails))
                         .collect(Collectors.toList());
 
-                final String heading = questionFromDetails.getHeadings().get(0).getHeading();
+                final String heading = getHeading(questionFromDetails);
                 questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromAllResponse));
             }
         }
         surveyResponse.setQuestions(questionResponses);
         return surveyResponse;
     }
-
 
     public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {
         return surveyMonkeyRepository.exchangeShortLivedTokenForBearer(shortLivedToken);
@@ -113,5 +112,10 @@ public class SurveyMonkeyService {
                 .map(SurveyPage::getQuestions)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
+    }
+
+    private String getHeading(final Question questionFromDetails) {
+        final List<Heading> headings = questionFromDetails.getHeadings();
+        return (headings.isEmpty()) ? StringUtils.EMPTY : headings.get(0).getHeading();
     }
 }
