@@ -23,4 +23,10 @@ public class SurveyMonkeyController {
         log.info("Received request for all surveys");
         return surveyMonkeyService.getAllSurveys();
     }
+
+    //@GetMapping("/questions/{surveyId}")
+    //public List<Object> getQuestionsWithResponses() {
+    //    log.info("Recevied request for all questions with responses");
+
+    //}
 }
