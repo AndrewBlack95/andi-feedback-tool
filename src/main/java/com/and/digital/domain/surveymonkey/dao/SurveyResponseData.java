@@ -7,7 +7,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor
-public class ResponseData {
+public class SurveyResponseData {
     private String id;
     private List<SurveyPage> pages;
 }

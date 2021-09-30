@@ -92,7 +92,7 @@ public class SurveyMonkeyService {
         final Set<SurveyPage> surveyPages = getSurveyResponses
                 .getData()
                 .stream()
-                .map(ResponseData::getPages)
+                .map(SurveyResponseData::getPages)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toSet());
         return surveyPages

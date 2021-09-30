@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class GetSurveyResponses {
-    private List<ResponseData> data;
+    private List<SurveyResponseData> data;
 }
