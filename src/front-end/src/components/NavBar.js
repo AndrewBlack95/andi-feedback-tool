@@ -68,7 +68,9 @@ const NavBar = (props) => {
           <StyledLogo src={logo} />
           <StyledTitle>The ANDi Feedback Tool</StyledTitle>
         </StyledNavBar>
-        <Link onClick={handleLogout} primary>Logout</Link>
+        {
+          props.preventLogout ? '' : <Link onClick={handleLogout} primary>Logout</Link> 
+        }
       </StyledNavContainer>
     </StyledHeaderContainer>
   );
