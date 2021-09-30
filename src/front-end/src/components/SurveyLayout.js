@@ -25,7 +25,7 @@ const StyledSurveyTitle = styled.h1`
   padding: 0;
 `;
 
-const SurveyLayout = ({ survey, loading }) => {
+const SurveyLayout = ({ survey, loading, tags, setTags }) => {
   return (
     <StyledSurveyContainer>
       <StyledSurveyLayout>
@@ -34,7 +34,7 @@ const SurveyLayout = ({ survey, loading }) => {
         || (
           <>
             <StyledSurveyTitle>{survey?.name}</StyledSurveyTitle>
-            <Questions questions={survey?.questions} />
+            <Questions surveyId={survey?.surveyId} questions={survey?.questions} tags={tags} setTags={setTags} />
           </>
         )}
       </StyledSurveyLayout>

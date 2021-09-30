@@ -10,30 +10,7 @@ import SurveyLayout from '../components/SurveyLayout';
 
 import getSurveyDetails from '../api/get-survey-details';
 
-const mockTags = { 
-  'Daragh': {
-    color: Math.floor(Math.random()*16777215).toString(16),
-    responses: [],
-    feedback: ''
-  },
-  'Mark Faulkner': {
-    color: Math.floor(Math.random()*16777215).toString(16),
-    responses: [],
-    feedback: ''
-  },
-  'Scrum Session': {
-    color: Math.floor(Math.random()*16777215).toString(16),
-    responses: [],
-    feedback: ''
-  },
-  'PD Fundamentals': {
-    color: Math.floor(Math.random()*16777215).toString(16),
-    responses: [],
-    feedback: ''
-  }
-}
-
-const SurveyPage = ({ token, setToken, selectedSurvey }) => {
+const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
   const history = useHistory();
 
   const [loading, setLoading] = useState(true);
@@ -57,9 +34,9 @@ const SurveyPage = ({ token, setToken, selectedSurvey }) => {
       <MainSection>
         <SidePanel>
           <BackButton />
-          <AvailableTags tags={mockTags} />
+          <AvailableTags tags={tags} setTags={setTags} />
         </SidePanel>
-        <SurveyLayout survey={survey} loading={loading} />
+        <SurveyLayout survey={survey} loading={loading} tags={tags} setTags={setTags} />
       </MainSection>
     </>
   )

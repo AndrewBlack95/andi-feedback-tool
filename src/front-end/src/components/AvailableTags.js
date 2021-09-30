@@ -1,5 +1,7 @@
 import styled from 'styled-components';
+import { useState } from 'react';
 
+import AddNewTag from './AddNewTag';
 import Tag from './Tag';
 
 const StyledAvailableTagsHeading = styled.h2`
@@ -20,45 +22,49 @@ const StyledAvailableTagsContainer = styled.div`
 
 const StyledAvailableTagsLine = styled.div`
   font-size: 12px;
-  height: 32px;
+  // height: 32px;
   line-height: 22px;
   padding: 5px;
 `;
 
-const StyledAddNewTag = styled.a`
-  background-color: var(--primaryBlueColor);
-  color: var(--primaryWhiteColor);
-  border-radius: 3px;
+const StyledNoTags = styled.div`
   font-size: 12px;
-  font-weight: 700;
-  margin-top: 10px;
-  padding: 6px 10px;
-  position: absolute;
-  right: 0;
-
-  &:hover {
-    background-color: var(--primaryBlueColor);
-    color: var(--primaryWhiteColor);
-    cursor: pointer;
-  }
+  padding: 6px;
 `;
 
-const AvailableTags = ({ tags }) => {
+const AvailableTags = ({ tags, setTags }) => {
   const tagNames = Object.keys(tags);
+
+  const [addNewTag, setAddNewTag] = useState(false);
+
+  const handleClickAddNewTag = () => {
+    if (!addNewTag) {
+      setAddNewTag(true);
+    }
+  }
   
   return (
     <>
       <StyledAvailableTagsHeading>Available Tags</StyledAvailableTagsHeading>
       <StyledAvailableTagsContainer>
-        {tagNames.map(tagName => {
-          return (
-            <StyledAvailableTagsLine key={`tagLine_${tagName}`}>
-              <Tag key={`tag_${tagName}`} tag={tags[tagName]}>{tagName}</Tag>
-            </StyledAvailableTagsLine>
-          )
-        })}
+        {tagNames.length === 0 ? <StyledNoTags>No tags</StyledNoTags> : (
+          tagNames.map(tagName => {
+            return (
+              <StyledAvailableTagsLine key={`tagLine_${tagName}`}>
+                <Tag key={`tag_${tagName}`} tag={tags[tagName]}>{tagName}</Tag>
+              </StyledAvailableTagsLine>
+            )
+          })
+        )}
       </StyledAvailableTagsContainer>
-      <StyledAddNewTag>+ Add New Tag</StyledAddNewTag>
+      <AddNewTag 
+        tags={tags} 
+        setTags={setTags} 
+        onClick={handleClickAddNewTag} 
+        addNewTag={addNewTag} 
+        setAddNewTag={setAddNewTag} 
+        className={addNewTag ? 'addNewTag' : ''}
+      />
     </>
   )
 };

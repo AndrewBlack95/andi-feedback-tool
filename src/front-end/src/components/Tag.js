@@ -3,23 +3,25 @@ import styled from 'styled-components';
 const StyledTag = styled.div`
   display: flex;
   background-color: var(--primaryWhiteColor);
-  border: 1px dashed grey;
-  padding: 4px 6px;
+  align-items: center;
+  border: ${props => props.hideBorder ? '' : '1px dashed grey'};
+  padding: 0px 3px;
   border-radius: 3px;
+  font-size: 12px;
 `;
 
 const StyledTagColor = styled.div`
   background-color: ${props => props.color ? `#${props.color}` : 'var(--primaryBlackColor)'};
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
   margin-right: 6px;
   border-radius: 3px;
   border: 1px solid grey;
 `;
 
-const Tag = ({ tag, children: tagName }) => {
+const Tag = ({ tag, children: tagName, ...props }) => {
   return (
-    <StyledTag><StyledTagColor color={tag.color}/>{tagName}</StyledTag>
+    <StyledTag {...props}><StyledTagColor color={tag.color}/>{tagName}</StyledTag>
   )
 };
 
