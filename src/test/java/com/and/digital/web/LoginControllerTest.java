@@ -11,6 +11,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mock.web.MockHttpServletRequest;
 
+import java.util.HashMap;
+
 import static com.and.digital.common.TestData.ERROR_MSG;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -43,13 +45,14 @@ class LoginControllerTest {
     @Test
     void exchange_ReturnsLongLivedCode() {
         final String shortLivedCode = "1234";
-        final String longLivedCode = "12345678";
+        final HashMap<String, String> longLivedCode = new HashMap<>();
+        longLivedCode.put("code", "12345678");
         final MockHttpServletRequest request = new MockHttpServletRequest();
         request.setParameter("code", shortLivedCode);
         when(service.exchangeShortLivedTokenForBearer(shortLivedCode))
-                .thenReturn(longLivedCode);
+                .thenReturn(longLivedCode.get("code"));
 
-        ResponseEntity<String> result = controllerUnderTest.exchangeTokens(shortLivedCode);
+        ResponseEntity<HashMap<String, String>> result = controllerUnderTest.exchangeTokens(shortLivedCode);
 
         assertThat(result.getStatusCode(), is(HttpStatus.OK));
         assertThat(result.getBody(), is(longLivedCode));
