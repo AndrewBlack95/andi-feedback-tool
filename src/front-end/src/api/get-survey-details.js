@@ -58,6 +58,9 @@ const combineAnswers = (answers = []) => {
 
 const transform = (data = {}) => {
  const { surveyId, name, questionCount, questions = [] } = data;
+ if(!surveyId && !name) {
+  throw new Error("Unexpected response", {cause: data});
+ }
  return {
    surveyId,
    name,

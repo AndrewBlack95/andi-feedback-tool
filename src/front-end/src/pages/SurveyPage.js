@@ -44,7 +44,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
         </SidePanel>
         <SurveyLayout survey={survey} loading={loading} tags={tags} setTags={setTags} />
       </MainSection>
-      <ExportModal displayModal={displayModal} setDisplayModal={setDisplayModal} />
+      <ExportModal displayModal={displayModal} setDisplayModal={setDisplayModal} survey={survey} tags={tags}/>
     </>
   )
 };

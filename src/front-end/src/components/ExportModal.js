@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import ExportPDFButton from './ExportPDFButton';
+
 const StyledExportContainer = styled.div`
   background-color: rgba(242,242,242,0.8);
   width: 100%;
@@ -36,7 +38,7 @@ const StyledModalTitle = styled.div`
   border-radius: 3px 3px 0 0;
 `;
 
-const ExportModal = ({ displayModal, setDisplayModal }) => {
+const ExportModal = ({ displayModal, setDisplayModal, tags, survey }) => {
   const handleClick = () => {
     setDisplayModal(false);
   }
@@ -50,6 +52,12 @@ const ExportModal = ({ displayModal, setDisplayModal }) => {
     <StyledExportContainer displayModal={displayModal} onClick={handleClick}>
       <StyledExportModal onClick={ignoreClick}>
         <StyledModalTitle displayModal={displayModal}>Export to PDF</StyledModalTitle>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <ExportPDFButton survey={survey} tags={tags}/>
       </StyledExportModal>
     </StyledExportContainer>
   )
