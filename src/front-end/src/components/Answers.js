@@ -82,10 +82,9 @@ const StyledLine = styled.div`
   }
 `;
 
-const getColorForScore = (score, total) => {
+const getColorForScore = (score) => {
   const parsedScore = parseInt(score);
-  const parsedTotal = parseInt(total);
-  const percent = (parsedScore / parsedTotal) * 100;
+  const percent = (parsedScore / 5) * 100;
 
   if (percent >= 66) {
     return 'var(--primaryGreenColor)'
@@ -103,11 +102,10 @@ const Answers = ({ answers, selected }) => {
     <>
       <StyledAnswers className={className}>
         {answers.map((answer, index) => {
-          const [score, total] = (answer.score || '').split('/');
           return (
             <StyledAnswer key={`answer_${index}`} className={className}>
               <StyledAnswerText className={className} disabled={!answer.text}>{answer.text}</StyledAnswerText>
-              {answer.score && <StyledAnswerScore className={className} color={getColorForScore(score, total)}><span>{score}</span>/ {total}</StyledAnswerScore>}
+              {answer.score && <StyledAnswerScore className={className} color={getColorForScore(answer.score)}><span>{answer.score}</span>/ 5</StyledAnswerScore>}
             </StyledAnswer>
           )
         })}
