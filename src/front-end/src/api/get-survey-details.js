@@ -42,7 +42,11 @@ const transformOpenEnded = (responses) => {
 
 const transformSingleChoice = (responses) => {
   return responses.map(responseForPerson => {
-    return { text: null, score: responseForPerson[0]?.score }
+    if (responseForPerson[0]?.score === 0) {
+      return { text: responseForPerson[0]?.value, score: null }
+    } else {
+      return { text: null, score: responseForPerson[0]?.score }
+    }
   })
 }
 
