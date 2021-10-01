@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 const StyledSidePanel = styled.div`
   bottom: 0;
+  display: flex;
+  flex-direction: column;
   padding: 60px 0;
   position: fixed;
   top: var(--topNavigationHeight);

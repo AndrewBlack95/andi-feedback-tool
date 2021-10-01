@@ -7,9 +7,8 @@ const StyledAddNewTag = styled.div`
   display: flex;
   font-size: 12px;
   font-weight: 700;
-  margin-left: auto;
-  margin-right: 0;
-  margin-top: 10px;
+  margin: 10px 0 10px auto;
+  width: 100%;
 `;
 
 const StyledAddNewTagContainer = styled.a`
