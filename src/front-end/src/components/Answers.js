@@ -101,14 +101,17 @@ const Answers = ({ answers, selected }) => {
   return (
     <>
       <StyledAnswers className={className}>
-        {answers.map((answer, index) => {
-          return (
-            <StyledAnswer key={`answer_${index}`} className={className}>
-              <StyledAnswerText className={className} disabled={!answer.text}>{answer.text}</StyledAnswerText>
-              {answer.score && <StyledAnswerScore className={className} color={getColorForScore(answer.score)}><span>{answer.score}</span>/ 5</StyledAnswerScore>}
-            </StyledAnswer>
-          )
-        })}
+        {answers.length === 0 
+          ? <StyledAnswerText className={className} disabled={false}>No answers</StyledAnswerText>
+          : answers.map((answer, index) => {
+            return (
+              <StyledAnswer key={`answer_${index}`} className={className}>
+                <StyledAnswerText className={className} disabled={!answer.text}>{answer.text}</StyledAnswerText>
+                {answer.score && <StyledAnswerScore className={className} color={getColorForScore(answer.score)}><span>{answer.score}</span>/ 5</StyledAnswerScore>}
+              </StyledAnswer>
+            )
+          })
+        }
       </StyledAnswers>
       <StyledLine className={className} />
     </>
