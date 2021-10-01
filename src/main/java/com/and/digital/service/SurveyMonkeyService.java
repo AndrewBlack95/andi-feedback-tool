@@ -54,7 +54,7 @@ public class SurveyMonkeyService {
             final QuestionType questionType = QuestionType.fromString(questionFromDetails.getFamily());
             final AnswerMapper answerMapper = questionMappersMap.get(questionType);
 
-            if (QuestionType.OPEN_ENDED == questionType || QuestionType.SINGLE_CHOICE == questionType) {
+            if (QuestionType.OPEN_ENDED == questionType || QuestionType.SINGLE_CHOICE == questionType || QuestionType.MULTIPLE_CHOICE == questionType) {
                 final List<Question> questionInfoResponses = surveyQuestionsFromResponse
                         .stream()
                         .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
