@@ -22,7 +22,6 @@ const StyledAvailableTagsContainer = styled.div`
 
 const StyledAvailableTagsLine = styled.div`
   font-size: 12px;
-  // height: 32px;
   line-height: 22px;
   padding: 5px;
 `;
@@ -33,15 +32,9 @@ const StyledNoTags = styled.div`
 `;
 
 const AvailableTags = ({ tags, setTags }) => {
-  const tagNames = Object.keys(tags);
-
   const [addNewTag, setAddNewTag] = useState(false);
 
-  const handleClickAddNewTag = () => {
-    if (!addNewTag) {
-      setAddNewTag(true);
-    }
-  }
+  const tagNames = Object.keys(tags);
   
   return (
     <>
@@ -60,7 +53,6 @@ const AvailableTags = ({ tags, setTags }) => {
       <AddNewTag 
         tags={tags} 
         setTags={setTags} 
-        onClick={handleClickAddNewTag} 
         addNewTag={addNewTag} 
         setAddNewTag={setAddNewTag} 
         className={addNewTag ? 'addNewTag' : ''}

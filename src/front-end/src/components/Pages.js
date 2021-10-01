@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCallback, useEffect } from 'react';
 
 import { SURVEYS_PER_PAGE } from '../constants';
 
@@ -34,15 +35,19 @@ const Pages = ({ surveys, currentPage, setCurrentPage }) => {
 
   const handlePageChange = (event) => {
     setCurrentPage(parseInt(event.target.innerHTML));
-  }
+  };
 
-  window.addEventListener('wheel', event => {
+  const handleWheelScroll = useCallback(event => {
     const nextPage = event.deltaY < 0 ? currentPage - 1 : currentPage + 1;
-
     if (nextPage >= 1 && nextPage <= noOfPages) {
-      setCurrentPage(nextPage);
+      setCurrentPage(() => nextPage);
     }
-  })
+  }, [currentPage, noOfPages, setCurrentPage]);
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleWheelScroll);
+    return () => window.removeEventListener('wheel', handleWheelScroll);
+  }, [handleWheelScroll]);
 
   return pageArray.length > 0 
     ? (

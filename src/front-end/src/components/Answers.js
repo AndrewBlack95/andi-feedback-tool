@@ -34,8 +34,8 @@ const StyledAnswerText = styled.div`
   width: 100%;
   
   &.selected {
-    ${props => props.disabled && 'background: repeating-linear-gradient(45deg,#ff6e6e,#ff6e6e 130px,var(--secondaryGreyColor) 130px,var(--secondaryGreyColor) 260px);'}
-    opacity: ${props => props.disabled ? '0.3': '1'};
+    ${props => props.disabled && 'background-color: #ff6e6e;'}
+    opacity: ${props => props.disabled ? '0.1': '1'};
     padding: 10px 20px;
   }
 `;

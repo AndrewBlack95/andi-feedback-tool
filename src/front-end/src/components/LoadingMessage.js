@@ -7,8 +7,9 @@ const LoadingMessage = ({ message, children }) => {
   const [dotCount, setDotCount] = useState(1);
 
   useEffect(() => {
-    setTimeout(() => setDotCount(dotCount + 1), 500);
-  }, [setDotCount, dotCount])
+    setInterval(() => setDotCount(count => count + 1), 500);
+    return () => setDotCount({});
+  }, []);
 
   const getDots = () => {
     return '.'.repeat(dotCount % 4);

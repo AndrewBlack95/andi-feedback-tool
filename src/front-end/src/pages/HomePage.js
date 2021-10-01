@@ -19,6 +19,7 @@ const HomePage = ({ token, setToken, setSelectedSurvey }) => {
         setSurveys(surveys)
         setLoading(false)
       })
+    return () => setSurveys({});
   }, [token, setSurveys]);
 
   return (

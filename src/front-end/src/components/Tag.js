@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 
 const StyledTag = styled.div`
-  display: flex;
-  background-color: var(--primaryWhiteColor);
   align-items: center;
+  background-color: var(--primaryWhiteColor);
   border: ${props => props.hideBorder ? '' : '1px dashed grey'};
-  padding: 0px 3px;
   border-radius: 3px;
+  display: flex;
   font-size: 12px;
+  line-height: 0;
+  padding: 3px 3px;
 `;
 
 const StyledTagColor = styled.div`
@@ -17,6 +18,7 @@ const StyledTagColor = styled.div`
   margin-right: 6px;
   border-radius: 3px;
   border: 1px solid grey;
+  pointer-events: none;
 `;
 
 const Tag = ({ tag, children: tagName, ...props }) => {

@@ -22,6 +22,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
         setSurvey(survey)
         setLoading(false);
       })
+    return () => setSurvey({});
   }, [token, selectedSurvey, setSurvey]);
 
   if (!selectedSurvey) {

@@ -42,27 +42,27 @@ const StyledAddNewTagContainer = styled.a`
 const StyledAddTagTextbox = styled.input`
   background-color: var(--primaryWhiteColor);
   border: 1px solid var(--secondaryGreyColor);
-  margin-top: 10px;
-  margin-bottom: 10px;
-  padding: 6px 10px;
-  // height: 24px;
   border-radius: 3px;
+  font-family: 'BrownPro-Regular';
   font-size: 12px;
-  font-family: 'BrownPro-Regular'
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 6px 10px;
 `;
 
 const StyledAddTagButton = styled.button`
   background-color: var(--primaryGreyColor);
+  border: none;
+  border-radius: 3px;
   color: var(--primaryBlackColor);
+  font-family: 'BrownPro-Regular';
+  font-size: 12px;
   margin-left: auto;
   padding: 4px 16px;
-  border-radius: 3px;
-  border: none;
-  font-family: 'BrownPro-Regular';
 
   &:hover {
-    cursor: pointer;
     background-color: var(--secondaryGreyColor);
+    cursor: pointer;
   }
 `;
 
@@ -80,6 +80,12 @@ const AddNewTag = (props) => {
     setNewTag(event.target.value);
   }
 
+  const handleClickAddNewTag = () => {
+    if (!props.addNewTag) {
+      props.setAddNewTag(true);
+    }
+  }
+
   useEffect(() => {
     textboxRef.current?.focus();
   })
@@ -94,11 +100,11 @@ const AddNewTag = (props) => {
 
   return (
     <StyledAddNewTag {...props}>
-      <StyledAddNewTagContainer {...props}>
+      <StyledAddNewTagContainer {...props} onClick={handleClickAddNewTag}>
         + Create Tag
         {props.addNewTag && (
           <>
-            <StyledAddTagTextbox ref={textboxRef} onChange={handleChange} className={props.addNewTag && 'addNewTag'}onClick={() => {}}/>
+            <StyledAddTagTextbox ref={textboxRef} maxLength='20' aria-label='add-tag-input' onChange={handleChange} className={props.addNewTag && 'addNewTag'} />
             <StyledAddTagButton onClick={handleAddNewTag} className={props.addNewTag && 'addNewTag'}>{newTag === '' ? 'Cancel' : 'Add'}</StyledAddTagButton>
           </>
         )}
