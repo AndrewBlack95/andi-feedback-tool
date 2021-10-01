@@ -30,6 +30,7 @@ public class Matrix implements AnswerMapper {
 
         answerDto.setValue(getAnswer(surveyAnswer, question));
         answerDto.setSubQuestionTitle(getSubQuestion(surveyAnswer, question));
+        answerDto.setScore(getScore(question, surveyAnswer.getChoiceId()));
 
         return answerDto;
     }
@@ -64,5 +65,9 @@ public class Matrix implements AnswerMapper {
 
     private String getOther(Question question, String id) {
         return id.equals(question.getAnswers().get(0).getOther().getId()) ? question.getAnswers().get(0).getOther().getText() : "";
+    }
+
+    private int getScore(Question question, String id) {
+        return question.getAnswers().get(0).getChoices().stream().filter(choice -> choice.getId().equals(id)).map(Choice::getWeight).findFirst().orElse(0);
     }
 }

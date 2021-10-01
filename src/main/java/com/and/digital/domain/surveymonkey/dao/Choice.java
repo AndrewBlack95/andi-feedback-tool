@@ -10,4 +10,5 @@ import lombok.NoArgsConstructor;
 public class Choice {
     private String text;
     private String id;
+    private int weight;
 }
