@@ -81,8 +81,8 @@ public class SurveyMonkeyService {
         return surveyMonkeyRepository.exchangeShortLivedTokenForBearer(shortLivedToken);
     }
 
-    public String getLoginURL() {
-        return surveyMonkeyRepository.buildLoginURL();
+    public String getLoginPage() {
+        return surveyMonkeyRepository.getLoginPage();
     }
 
     private SurveyResponseDto getSurveyResponseDto(final SurveyDetails surveyDetails) {
