@@ -11,7 +11,7 @@ test('renders with the correct text', () => {
 test('renders with the correct style', () => {
   const { getByTestId } = render(<WelcomeMessage data-testid='welcome-message'></WelcomeMessage>);
   expect(getByTestId('welcome-message')).toHaveStyle({ 
-    'color': 'var(--primaryBackgroundColor)',
+    'color': 'var(--primaryBlueColor)',
     'font-size': '20px',
     'font-weight': '700',
     'padding': '40px 0'
