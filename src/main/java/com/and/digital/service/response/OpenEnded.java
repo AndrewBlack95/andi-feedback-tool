@@ -5,20 +5,23 @@ import com.and.digital.domain.surveymonkey.dao.SurveyAnswer;
 import com.and.digital.domain.surveymonkey.dto.AnswerDto;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 
 @Component
 public class OpenEnded implements AnswerMapper {
 
     @Override
-    public AnswerDto mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question) {
+    public List<List<AnswerDto>> mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question) {
         if (answersFromResponses.isEmpty()) {
-            return new AnswerDto();
+            return Collections.emptyList();
         }
         final SurveyAnswer surveyAnswer = answersFromResponses.get(0);
+
         final AnswerDto answerDto = new AnswerDto();
         answerDto.setValue(surveyAnswer.getText());
-        return answerDto;
+
+        return Collections.singletonList(Collections.singletonList(answerDto));
     }
 
     @Override

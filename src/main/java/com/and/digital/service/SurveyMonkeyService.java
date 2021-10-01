@@ -49,25 +49,31 @@ public class SurveyMonkeyService {
 
         final List<QuestionResponseDto> questionResponses = new ArrayList<>();
 
+
         for (final Question questionFromDetails : surveyQuestionsFromDetails) {
             final QuestionType questionType = QuestionType.fromString(questionFromDetails.getFamily());
             final AnswerMapper answerMapper = questionMappersMap.get(questionType);
 
-            final List<Question> questionInfoResponses = surveyQuestionsFromResponse
-                    .stream()
-                    .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
+            if (QuestionType.OPEN_ENDED == questionType) {
+                final List<Question> questionInfoResponses = surveyQuestionsFromResponse
+                        .stream()
+                        .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
 
-            if (nonNull(answerMapper)) {
-                final List<AnswerDto> answersFromResponses = questionInfoResponses.stream()
-                        .map(Question::getAnswers)
-                        .map(e -> answerMapper.mapResponse(e, questionFromDetails))
-                        .collect(Collectors.toList());
+                if (nonNull(answerMapper)) {
+                    final String heading = questionFromDetails.getHeadings().get(0).getHeading();
 
-                final String heading = getHeading(questionFromDetails);
-                questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromResponses));
+                    final Map<String, List<List<AnswerDto>>> answersFromResponses = questionInfoResponses
+                            .stream()
+                            .map(Question::getAnswers)
+                            .map(e -> answerMapper.mapResponse(e, questionFromDetails))
+                            .collect(Collectors.toMap(e -> heading, Function.identity(), (entry1, entry2) -> entry1));
+
+
+                    questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromResponses));
+                }
             }
+            surveyResponse.setQuestions(questionResponses);
         }
-        surveyResponse.setQuestions(questionResponses);
         return surveyResponse;
     }
 
