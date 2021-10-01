@@ -5,12 +5,10 @@ import Tag from './Tag';
 
 const StyledAssignedTags = styled.div`
   display: flex;
-  // flex-wrap: wrap;
   margin-top: 5px;
-  width: 100%;
-  // background-color: orange;
   overflow-x: hidden;
   white-space: nowrap;
+  width: 100%;
 
   & .assigned_tag {
     margin-left: 5px;
@@ -40,14 +38,14 @@ const StyledSelectTag = styled.div`
   border-radius: 3px;
   box-shadow: 0 0 2px grey;
   left: ${props => props.pageX + 10}px;
+  max-height: 240px;
+  overflow: auto;
   padding: 5px;
   position: fixed;
   top: ${props => props.pageY + 10}px;
   transform: translateY(${props => props.translateY}%);
   width: 160px;
   z-index: 100;
-  max-height: 240px;
-  overflow: auto;
 
   & div {
     margin-bottom: 5px;
