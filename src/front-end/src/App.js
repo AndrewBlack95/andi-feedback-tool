@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from './pages/HomePage';
 import LogInPage from './pages/LogInPage';
 import SurveyPage from './pages/SurveyPage';
+import AuthPage from './pages/AuthPage';
 
 const App = () => {
   const [token, setToken] = useState(null);
@@ -18,6 +19,7 @@ const App = () => {
         <Switch>
           <Route path="/home"><HomePage token={token} setToken={setToken} setSelectedSurvey={setSelectedSurvey} /></Route>
           <Route path="/survey"><SurveyPage token={token} setToken={setToken} selectedSurvey={selectedSurvey} tags={tags} setTags={setTags} /></Route>
+          <Route path="/auth"><AuthPage token={token} setToken={setToken}/></Route>
           <Route path="/"><LogInPage /></Route>
         </Switch>
       </div>

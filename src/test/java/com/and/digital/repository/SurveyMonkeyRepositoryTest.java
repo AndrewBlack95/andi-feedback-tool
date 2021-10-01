@@ -49,7 +49,7 @@ class SurveyMonkeyRepositoryTest {
 
     @Test
     void getSurveys_responsesReturned_success() {
-        when(mockRestTemplate.getForEntity("https://dummy/api/",
+        when(mockRestTemplate.getForEntity("https://api.surveymonkey.com/v3/surveys/",
                 GetAllSurveysResponse.class)).thenReturn(getExpectedGetAllSurveysResponses());
 
         assertEquals(TestData.getExpectedGetAllSurveysResponses().getBody(), classUnderTest.getAllSurveysResponse());
@@ -58,7 +58,7 @@ class SurveyMonkeyRepositoryTest {
 
     @Test
     void getSurveys_errorReturned_exceptionThrown() {
-        when(mockRestTemplate.getForEntity("https://dummy/api/",
+        when(mockRestTemplate.getForEntity("https://api.surveymonkey.com/v3/surveys/",
                 GetAllSurveysResponse.class)).thenThrow(new RestClientException(ERROR_MSG));
         assertThrows(RestClientException.class, () -> classUnderTest.getAllSurveysResponse(), ERROR_MSG);
         verifyNoMoreInteractions(mockRestTemplate);
