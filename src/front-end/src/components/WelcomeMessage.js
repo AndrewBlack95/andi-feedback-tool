@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledWelcomeMessage = styled.div`
-  color: var(--primaryBackgroundColor);
+  color: var(--primaryBlueColor);
   font-size: 20px;
   font-weight: 700;
   padding: 40px 0;

@@ -5,7 +5,7 @@ import logo from '../logo.png';
 import Link from './Link';
 
 const StyledHeaderContainer = styled.div`
-  background-color: var(--primaryBackgroundColor);
+  background-color: var(--primaryBlueColor);
   height: var(--topNavigationHeight,0px);
   position: fixed;
   width: 100%;
@@ -48,7 +48,7 @@ const StyledLogo = styled.img`
 `;
 
 const StyledTitle = styled.h1`
-  color: var(--primaryFontColor,white);
+  color: var(--primaryWhiteColor);
   font-size: 20px;
   margin: 0 4px;
 `;
