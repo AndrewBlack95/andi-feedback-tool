@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCallback, useEffect } from 'react';
 
 import { SURVEYS_PER_PAGE } from '../constants';
 
@@ -12,19 +13,19 @@ const StyledPageContainer = styled.div`
 
 const StyledPage = styled.a`
   align-items: center;
-  background-color: ${props => props.selected ? 'var(--primaryBackgroundColor)' : '#f2f2f2'};
+  background-color: ${props => props.selected ? 'var(--primaryBlueColor)' : 'var(--primaryGreyColor)'};
   border-radius: 3px;
-  color: ${props => props.selected ? 'white': 'black'};
+  color: ${props => props.selected ? 'var(--primaryWhiteColor)': 'var(--primaryBlackColor)'};
   display: flex;
   justify-content: center;
   margin-left: 5px;
   min-width: 20px;
-  padding: 2px 20px;
+  padding: 4px 20px;
 
   &:hover {
     cursor: pointer;
-    color: white;
-    background-color: var(--primaryBackgroundColor);
+    color: var(--primaryWhiteColor);
+    background-color: var(--primaryBlueColor);
   }
 `;
 
@@ -34,7 +35,19 @@ const Pages = ({ surveys, currentPage, setCurrentPage }) => {
 
   const handlePageChange = (event) => {
     setCurrentPage(parseInt(event.target.innerHTML));
-  }
+  };
+
+  const handleWheelScroll = useCallback(event => {
+    const nextPage = event.deltaY < 0 ? currentPage - 1 : currentPage + 1;
+    if (nextPage >= 1 && nextPage <= noOfPages) {
+      setCurrentPage(() => nextPage);
+    }
+  }, [currentPage, noOfPages, setCurrentPage]);
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleWheelScroll);
+    return () => window.removeEventListener('wheel', handleWheelScroll);
+  }, [handleWheelScroll]);
 
   return pageArray.length > 0 
     ? (
