@@ -52,7 +52,7 @@ const transformSingleChoice = (responses) => {
 
 const transformMultipleChoice = (responses) => {
   return responses.map(responseForPerson => {
-    return responseForPerson.map(response => response.value).join(', ')
+    return [ ...new Set(responseForPerson.map(response => response.value)) ].join(', ')
   })
 }
 
@@ -67,7 +67,11 @@ const transform = (data = {}) => {
    surveyId,
    name,
    questionCount,
-   questions: questions.reduce((acc, question) => {
+   questions: questions.reduce((acc, question, index) => {
+    if (index === 0) {
+      return acc;
+    }
+    
     const { title, questionType, responses = [] } = question;
 
     if (questionType === 'OPEN_ENDED') {
