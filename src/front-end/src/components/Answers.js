@@ -12,7 +12,7 @@ const StyledAnswers = styled.div`
     margin-bottom: 10px;
     opacity: 1;
     max-height: 320px;
-    overflow: auto;
+    overflow-y: auto;
   }
 `;
 
