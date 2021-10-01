@@ -54,21 +54,20 @@ public class SurveyMonkeyService {
             final QuestionType questionType = QuestionType.fromString(questionFromDetails.getFamily());
             final AnswerMapper answerMapper = questionMappersMap.get(questionType);
 
-            if (QuestionType.OPEN_ENDED == questionType) {
+            if (QuestionType.OPEN_ENDED == questionType || QuestionType.SINGLE_CHOICE == questionType) {
                 final List<Question> questionInfoResponses = surveyQuestionsFromResponse
                         .stream()
                         .filter(question -> question.getId().equals(questionFromDetails.getId())).collect(Collectors.toList());
 
                 if (nonNull(answerMapper)) {
-                    final String heading = questionFromDetails.getHeadings().get(0).getHeading();
+                    final List<Heading> headings = questionFromDetails.getHeadings();
+                    final String heading = (headings.isEmpty()) ? StringUtils.EMPTY : headings.get(0).getHeading();
 
                     final List<List<AnswerDto>> answersFromResponses = questionInfoResponses
                             .stream()
                             .map(Question::getAnswers)
                             .map(e -> answerMapper.mapResponse(e, questionFromDetails))
-                            .flatMap(Collection::stream)
                             .collect(Collectors.toList());
-
 
                     questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromResponses));
                 }

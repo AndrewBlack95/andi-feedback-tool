@@ -12,7 +12,7 @@ import java.util.List;
 public class OpenEnded implements AnswerMapper {
 
     @Override
-    public List<List<AnswerDto>> mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question) {
+    public List<AnswerDto> mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question) {
         if (answersFromResponses.isEmpty()) {
             return Collections.emptyList();
         }
@@ -21,7 +21,7 @@ public class OpenEnded implements AnswerMapper {
         final AnswerDto answerDto = new AnswerDto();
         answerDto.setValue(surveyAnswer.getText());
 
-        return Collections.singletonList(Collections.singletonList(answerDto));
+        return Collections.singletonList(answerDto);
     }
 
     @Override

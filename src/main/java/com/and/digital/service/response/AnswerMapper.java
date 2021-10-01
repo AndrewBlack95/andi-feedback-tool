@@ -7,7 +7,7 @@ import com.and.digital.domain.surveymonkey.dto.AnswerDto;
 import java.util.List;
 
 public interface AnswerMapper {
-    List<List<AnswerDto>> mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question);
+    List<AnswerDto> mapResponse(final List<SurveyAnswer> answersFromResponses, final Question question);
 
     QuestionType getQuestionType();
 }
