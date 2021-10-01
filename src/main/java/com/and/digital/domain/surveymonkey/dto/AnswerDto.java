@@ -7,4 +7,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AnswerDto {
     private String value;
+    private int score;
 }
