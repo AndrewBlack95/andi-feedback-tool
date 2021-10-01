@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -14,5 +13,5 @@ import java.util.Map;
 public class QuestionResponseDto {
     private QuestionType questionType;
     private String title;
-    private Map<String, List<List<AnswerDto>>> responseMap;
+    private List<List<AnswerDto>> responses;
 }

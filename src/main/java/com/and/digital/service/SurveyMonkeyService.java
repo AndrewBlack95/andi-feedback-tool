@@ -62,11 +62,12 @@ public class SurveyMonkeyService {
                 if (nonNull(answerMapper)) {
                     final String heading = questionFromDetails.getHeadings().get(0).getHeading();
 
-                    final Map<String, List<List<AnswerDto>>> answersFromResponses = questionInfoResponses
+                    final List<List<AnswerDto>> answersFromResponses = questionInfoResponses
                             .stream()
                             .map(Question::getAnswers)
                             .map(e -> answerMapper.mapResponse(e, questionFromDetails))
-                            .collect(Collectors.toMap(e -> heading, Function.identity(), (entry1, entry2) -> entry1));
+                            .flatMap(Collection::stream)
+                            .collect(Collectors.toList());
 
 
                     questionResponses.add(new QuestionResponseDto(questionType, heading, answersFromResponses));
