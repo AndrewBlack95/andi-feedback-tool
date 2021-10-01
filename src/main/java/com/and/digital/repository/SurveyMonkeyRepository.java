@@ -28,15 +28,15 @@ public class SurveyMonkeyRepository {
     private final SurveyMonkeyProperties properties;
 
     public GetAllSurveysResponse getAllSurveysResponse() {
-        return handleRestRequest(() -> restTemplate.getForEntity("https://dummy/api/", GetAllSurveysResponse.class));
+        return handleRestRequest(() -> restTemplate.getForEntity(properties.getGetSurveysUri(), GetAllSurveysResponse.class));
     }
 
     public SurveyDetails getSurveyDetails(final String id) {
-        return handleRestRequest(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/details", id), SurveyDetails.class));
+        return handleRestRequest(() -> restTemplate.getForEntity(String.format(properties.getGetSurveyDetailsUri(), id), SurveyDetails.class));
     }
 
     public GetSurveyResponses getIndividualSurveyResponses(final String id) {
-        return handleRestRequest(() -> restTemplate.getForEntity(String.format("https://api.surveymonkey.com/v3/surveys/%s/responses/bulk", id), GetSurveyResponses.class));
+        return handleRestRequest(() -> restTemplate.getForEntity(String.format(properties.getGetSurveyResponsesUri(), id), GetSurveyResponses.class));
     }
 
     public String exchangeShortLivedTokenForBearer(final String shortLivedToken) {

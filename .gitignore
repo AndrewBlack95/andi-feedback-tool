@@ -43,6 +43,9 @@ coverage
 # production
 /build
 
+# fonts
+*.otf
+
 # misc
 .DS_Store
 .env.local

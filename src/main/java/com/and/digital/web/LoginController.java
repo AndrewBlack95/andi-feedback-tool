@@ -1,8 +1,11 @@
 package com.and.digital.web;
 
+import com.and.digital.exception.TokenExchangeException;
 import com.and.digital.service.SurveyMonkeyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,18 +22,22 @@ public class LoginController {
     @GetMapping("/login")
     public ResponseEntity<String> login() {
         final String apiResponse = surveyMonkeyService.getLoginPage();
-        return ResponseEntity.ok(apiResponse);
+        final HttpHeaders responseHeaders = new HttpHeaders();
+        responseHeaders.set("location", apiResponse);
+
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .headers(responseHeaders)
+                .build();
     }
 
     @GetMapping("/exchange-token")
-    public String exchangeTokens(@RequestParam String code) {
-
-        if (code == null || code.isEmpty()) {
-            //TODO replace with custom exception
-            throw new IllegalArgumentException("Need a short lived code to proceed any further.");
+    public ResponseEntity<String> exchangeTokens(@RequestParam String shortLivedCode) {
+        if (shortLivedCode == null || shortLivedCode.isEmpty()) {
+            throw new TokenExchangeException("Could not exchange short lived token for bearer token");
         }
 
-        return "";
+        final String longLivedCode = surveyMonkeyService.exchangeShortLivedTokenForBearer(shortLivedCode);
+        return ResponseEntity.ok(longLivedCode);
     }
 }
 
