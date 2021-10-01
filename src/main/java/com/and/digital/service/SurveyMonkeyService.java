@@ -52,7 +52,6 @@ public class SurveyMonkeyService {
         for (final Question questionFromDetails : surveyQuestionsFromDetails) {
             final QuestionType questionType = QuestionType.fromString(questionFromDetails.getFamily());
             final AnswerMapper answerMapper = questionMappersMap.get(questionType);
-            
 
             final List<Question> questionInfoResponses = surveyQuestionsFromResponse
                     .stream()
