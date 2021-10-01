@@ -19,10 +19,10 @@ class SurveyMonkeyPropertiesTest {
         classUnderTest = new SurveyMonkeyProperties();
         classUnderTest.setClientId(clientId);
         classUnderTest.setClientSecret(clientSecret);
-        classUnderTest.setGetSurveysUrl(getSurveysUrl);
+        classUnderTest.setGetSurveysUri(getSurveysUrl);
 
         assertEquals(clientId, classUnderTest.getClientId());
         assertEquals(clientSecret, classUnderTest.getClientSecret());
-        assertEquals(getSurveysUrl, classUnderTest.getGetSurveysUrl());
+        assertEquals(getSurveysUrl, classUnderTest.getGetSurveysUri());
     }
 }
