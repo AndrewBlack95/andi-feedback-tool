@@ -23,7 +23,7 @@ public class LoginController {
 
     @GetMapping("/login")
     public ResponseEntity<String> login() {
-        final String apiResponse = surveyMonkeyService.getLoginURL();
+        final String apiResponse = surveyMonkeyService.getLoginPage();
         final HttpHeaders responseHeaders = new HttpHeaders();
         responseHeaders.set("location", apiResponse);
 

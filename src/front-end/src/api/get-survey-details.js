@@ -34,38 +34,60 @@
 //   ]
 // }
 
-const combineAnswers = (answers = []) => {
-  return answers.reduce((transformedAnswers, answer) => {
-    const index = transformedAnswers.findIndex((ans) => ans.responseId === answer.responseId);
+const transformOpenEnded = (responses) => {
+  return responses.map(responseForPerson => {
+    return { text: responseForPerson[0]?.value, score: null }
+  });
+};
 
-    if (index >= 0) {
-      if (answer.type === 'TEXT') {
-        transformedAnswers[index].text = answer.value;
-      }
-      if (answer.type === 'SCORE') {
-        transformedAnswers[index].score = answer.value;
-      }
+const transformSingleChoice = (responses) => {
+  return responses.map(responseForPerson => {
+    if (responseForPerson[0]?.score === 0) {
+      return { text: responseForPerson[0]?.value, score: null }
     } else {
-      transformedAnswers.push({ 
-        responseId: answer.responseId, 
-        text: answer.type === 'TEXT' ? answer.value : null, 
-        score: answer.type === 'SCORE' ? answer.value : null
-      });
+      return { text: null, score: responseForPerson[0]?.score }
     }
-    return transformedAnswers;
-  }, []);
+  })
+}
+
+const transformMultipleChoice = (responses) => {
+  return responses.map(responseForPerson => {
+    return [ ...new Set(responseForPerson.map(response => response.value)) ].join(', ')
+  })
 }
 
 const transform = (data = {}) => {
  const { surveyId, name, questionCount, questions = [] } = data;
+
+ if (!surveyId || !name) {
+   throw new Error('Unexpected response format', { cause: data });
+ };
+ 
  return {
    surveyId,
    name,
    questionCount,
-   questions: questions.map(question => {
-     const { questionName, answers = [] } = question;
-     return { questionName, answers: combineAnswers(answers) }
-   })
+   questions: questions.reduce((acc, question, index) => {
+    if (index === 0) {
+      return acc;
+    }
+    
+    const { title, questionType, responses = [] } = question;
+
+    if (questionType === 'OPEN_ENDED') {
+      acc.push({ questionName: title, answers: transformOpenEnded(responses) });
+    }
+
+    if (questionType === 'SINGLE_CHOICE') {
+      acc.push({ questionName: title, answers: transformSingleChoice(responses) });
+    }
+    
+    if (questionType === 'MULTIPLE_CHOICE') {
+      acc.push({ questionName: title, answers: transformMultipleChoice(responses) });
+    }
+
+    return acc;
+   }, [])
  }
 }
 

@@ -1,7 +1,7 @@
 package com.and.digital.common;
 
-import com.and.digital.domain.surveymonkey.GetAllSurveysResponse;
-import com.and.digital.domain.surveymonkey.SurveyData;
+import com.and.digital.domain.surveymonkey.dao.GetAllSurveysResponse;
+import com.and.digital.domain.surveymonkey.dao.SurveyData;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
