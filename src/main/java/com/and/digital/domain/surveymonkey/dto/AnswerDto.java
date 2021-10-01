@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 public class AnswerDto {
     private String value;
     private int score;
+    private String subQuestionTitle;
 }

@@ -12,7 +12,13 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SurveyAnswer {
     private String text;
-    private List<Choice> choices;
     @JsonProperty("choice_id")
     private String choiceId;
+    @JsonProperty("row_id")
+    private String rowId;
+    @JsonProperty("other_id")
+    private String otherId;
+    private List<Choice> choices;
+    private List<Row> rows;
+    private Other other;
 }
