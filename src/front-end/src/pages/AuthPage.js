@@ -1,11 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 
-import NavBar from '../components/NavBar';
-import Button from '../components/LoginButton';
 import MainSection from '../components/MainSection';
-import LoginMessage from '../components/LoginMessage';
-import AssistanceMessage from '../components/AssistanceMessage';
+import NavBar from '../components/NavBar';
+import WelcomeMessage from '../components/WelcomeMessage';
 
 import exchangeTokens from '../api/exchange-tokens';
 
@@ -29,9 +27,7 @@ const AuthPage = (props) => {
     <>
       <NavBar preventLogout={true}/>
       <MainSection>
-        <LoginMessage/>
-        <Button primary>Sign in with Survey Monkey</Button>
-        <AssistanceMessage/>
+        <WelcomeMessage />
       </MainSection>
     </>
   );

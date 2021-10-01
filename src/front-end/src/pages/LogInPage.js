@@ -15,9 +15,9 @@ const LogInPage = () => {
     <>
       <NavBar preventLogout={true}/>
       <MainSection>
-        <LoginMessage/>
+        <LoginMessage />
         <Button onClick={handleLogin} primary>Sign in with Survey Monkey</Button>
-        <AssistanceMessage/>
+        <AssistanceMessage />
       </MainSection>
     </>
   );
