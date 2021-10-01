@@ -10,7 +10,7 @@ test('should return valid survey objects when called with a token', async () => 
 
   expect(window.fetch).toHaveBeenCalledWith(
     'http://localhost:8080/api/survey-details/12345',
-    { headers: { authorization: 'abc' } }
+    { headers: { authorization: 'Bearer abc' } }
   );
   expect(surveys).toStrictEqual(response)
 });
@@ -21,7 +21,7 @@ test('should return an empty object when the response isnt successful', async ()
 
   expect(window.fetch).toHaveBeenCalledWith(
     'http://localhost:8080/api/survey-details/23456',
-    { headers: { authorization: 'abc' } }
+    { headers: { authorization: 'Bearer abc' } }
   );
   expect(surveys).toStrictEqual(null);
 });

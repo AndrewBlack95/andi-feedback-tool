@@ -22,7 +22,7 @@ const validateResponse = (data) => {
 };
 
 const getSurveys = (token) => {
-  return fetch('http://localhost:8080/api/surveys', { headers: { authorization: token } })
+  return fetch('http://localhost:8080/api/surveys', { headers: { authorization: `Bearer ${token}` } })
     .then(response => response.json())
     .then(data => validateResponse(data))
     .catch(e => [])

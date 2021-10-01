@@ -70,7 +70,7 @@ const transform = (data = {}) => {
 }
 
 const getSurveyDetails = (token, surveyId = '') => {
-  return fetch(`http://localhost:8080/api/survey-details/${surveyId}`, { headers: { authorization: token } })
+  return fetch(`http://localhost:8080/api/survey-details/${surveyId}`, { headers: { authorization: `Bearer ${token}` } })
     .then(response => response.json())
     .then(data => transform(data))
     .catch(e => null)
