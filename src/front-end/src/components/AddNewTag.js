@@ -13,16 +13,17 @@ const StyledAddNewTag = styled.div`
 
 const StyledAddNewTagContainer = styled.a`
   background-color: var(--primaryBlueColor);
+  border: 1px solid var(--primaryBlueColor);
   border-radius: 3px;
   color: var(--primaryWhiteColor);
   display: flex;
   flex-direction: column;
   height: 16px;
   margin-left: auto;
-  padding: 6px 10px;
-  transition: all 400ms linear;
-  width: 72px;
   overflow: hidden;
+  padding: 6px 10px;
+  transition: height 400ms, width 400ms linear;
+  width: 72px;
 
   &.addNewTag {
     height: 90px;
@@ -30,9 +31,12 @@ const StyledAddNewTagContainer = styled.a`
   }
 
   &:hover {
+    border: 1px solid var(--primaryBlackColor);
     cursor: pointer;
 
+
     &.addNewTag {
+      border: 1px solid var(--primaryBlueColor);
       cursor: default;
     }
   }
@@ -68,7 +72,7 @@ const StyledAddTagButton = styled.button`
 const generateNewTag = () => ({ 
   color: Math.floor(Math.random()*16777215).toString(16), 
   responses: [], 
-  feedback: [] 
+  feedback: {}
 });
 
 const AddNewTag = (props) => {

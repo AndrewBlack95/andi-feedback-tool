@@ -122,7 +122,7 @@ const AssignedTags = ({ surveyId, selected, tagQuestion, setTagQuestion, index: 
         </StyledSelectTag>
       )}
       {tagNames
-        .filter(tag => tags[tag].responses.findIndex(response => response.question === questionIndex) >=0)
+        .filter(tag => tags[tag].responses.findIndex(response => response.question === questionIndex  && response.survey === surveyId) >=0)
         .map(tag => <Tag key={`assigned_tag_${tag}`} className='assigned_tag' tag={tags[tag]} onClick={(event) => handleRemoveTag(tag, questionIndex, event)}>{tag}</Tag>)
       }
     </StyledAssignedTags>
