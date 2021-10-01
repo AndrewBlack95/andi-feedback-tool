@@ -40,10 +40,10 @@ public class SurveyMonkeyService {
     }
 
     public SurveyResponseDto getResponsesForSurvey(final String surveyId) {
-        final Set<Question> surveyQuestionsFromResponse = getQuestionsFromResponses(surveyId);
+        final List<Question> surveyQuestionsFromResponse = getQuestionsFromResponses(surveyId);
 
         final SurveyDetails surveyDetails = surveyMonkeyRepository.getSurveyDetails(surveyId);
-        final Set<Question> surveyQuestionsFromDetails = getQuestionsFromDetails(surveyDetails);
+        final List<Question> surveyQuestionsFromDetails = getQuestionsFromDetails(surveyDetails);
 
         final SurveyResponseDto surveyResponse = getSurveyResponseDto(surveyDetails);
 
@@ -52,6 +52,10 @@ public class SurveyMonkeyService {
         for (final Question questionFromDetails : surveyQuestionsFromDetails) {
             final QuestionType questionType = QuestionType.fromString(questionFromDetails.getFamily());
             final AnswerMapper answerMapper = questionMappersMap.get(questionType);
+
+            if (questionType == QuestionType.SINGLE_CHOICE) {
+                log.error("log");
+            }
 
             final List<Question> questionInfoResponses = surveyQuestionsFromResponse
                     .stream()
@@ -87,7 +91,7 @@ public class SurveyMonkeyService {
         return surveyResponse;
     }
 
-    private Set<Question> getQuestionsFromResponses(final String surveyId) {
+    private List<Question> getQuestionsFromResponses(final String surveyId) {
         final GetSurveyResponses getSurveyResponses = surveyMonkeyRepository.getIndividualSurveyResponses(surveyId);
         final Set<SurveyPage> surveyPages = getSurveyResponses
                 .getData()
@@ -99,16 +103,16 @@ public class SurveyMonkeyService {
                 .stream()
                 .map(SurveyPage::getQuestions)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
-    private Set<Question> getQuestionsFromDetails(final SurveyDetails surveyDetails) {
+    private List<Question> getQuestionsFromDetails(final SurveyDetails surveyDetails) {
         return surveyDetails
                 .getPages()
                 .stream()
                 .map(SurveyPage::getQuestions)
                 .flatMap(Collection::stream)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
     }
 
     private String getHeading(final Question questionFromDetails) {
