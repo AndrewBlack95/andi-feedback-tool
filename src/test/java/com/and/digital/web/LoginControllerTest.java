@@ -22,7 +22,8 @@ import static org.mockito.Mockito.when;
 @ExtendWith(MockitoExtension.class)
 class LoginControllerTest {
 
-    @Mock private SurveyMonkeyService service;
+    @Mock
+    private SurveyMonkeyService service;
     private LoginController controllerUnderTest;
 
     @BeforeEach
@@ -33,7 +34,7 @@ class LoginControllerTest {
     @Test
     void login_ReturnsLoginUrl() {
         final String loginPage = "some markup denoting a login page";
-        when(service.getLoginURL())
+        when(service.getLoginPage())
                 .thenReturn(loginPage);
 
         ResponseEntity<String> result = controllerUnderTest.login();

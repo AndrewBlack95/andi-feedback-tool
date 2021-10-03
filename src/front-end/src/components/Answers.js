@@ -12,7 +12,7 @@ const StyledAnswers = styled.div`
     margin-bottom: 10px;
     opacity: 1;
     max-height: 320px;
-    overflow: auto;
+    overflow-y: auto;
   }
 `;
 
@@ -82,10 +82,9 @@ const StyledLine = styled.div`
   }
 `;
 
-const getColorForScore = (score, total) => {
+const getColorForScore = (score) => {
   const parsedScore = parseInt(score);
-  const parsedTotal = parseInt(total);
-  const percent = (parsedScore / parsedTotal) * 100;
+  const percent = (parsedScore / 5) * 100;
 
   if (percent >= 66) {
     return 'var(--primaryGreenColor)'
@@ -102,15 +101,17 @@ const Answers = ({ answers, selected }) => {
   return (
     <>
       <StyledAnswers className={className}>
-        {answers.map((answer, index) => {
-          const [score, total] = (answer.score || '').split('/');
-          return (
-            <StyledAnswer key={`answer_${index}`} className={className}>
-              <StyledAnswerText className={className} disabled={!answer.text}>{answer.text}</StyledAnswerText>
-              {answer.score && <StyledAnswerScore className={className} color={getColorForScore(score, total)}><span>{score}</span>/ {total}</StyledAnswerScore>}
-            </StyledAnswer>
-          )
-        })}
+        {answers.length === 0 
+          ? <StyledAnswerText className={className} disabled={false}>No answers</StyledAnswerText>
+          : answers.map((answer, index) => {
+            return (
+              <StyledAnswer key={`answer_${index}`} className={className}>
+                <StyledAnswerText className={className} disabled={!answer.text}>{answer.text}</StyledAnswerText>
+                {answer.score && <StyledAnswerScore className={className} color={getColorForScore(answer.score)}><span>{answer.score}</span>/ 5</StyledAnswerScore>}
+              </StyledAnswer>
+            )
+          })
+        }
       </StyledAnswers>
       <StyledLine className={className} />
     </>

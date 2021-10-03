@@ -18,7 +18,6 @@ const StyledExportPDFButton = styled.div`
   width: 50%;
   margin-left: auto;
   margin-right: auto;
-
   &:hover {
     cursor: pointer;
   }
@@ -57,14 +56,15 @@ const MyDocument = ({ survey }) => {
       </View>
     </Page>
     <Page object-fit="fill" style={styles.page} size="A4">
+    {console.log(survey)}
     <View style={styles.view}>
         {survey?.questions.map((question, index) => {
           return (
               <Text key={index}>
-                {index + 1 + ". " + question.questionName}
+                {"Question " + (index + 1) + ". " + question.questionName}
                 {"\n"}
                 {question.answers.map((answer, index) => {
-                    return <Text key={index}>{"\n"}{answer.text}{answer.text && answer.score ? " - " : ""}{answer.score}</Text>
+                    return <Text key={index}>{"\n\n"}{"Response " + (index + 1) + ". "}{answer.text}{answer.text && answer.score ? " - " : ""}{answer.score}</Text>
                   })
                 }
                 {"\n\n"}
@@ -80,11 +80,9 @@ const MyDocument = ({ survey }) => {
 
 export const ExportPDFButton = React.memo(({survey}) => {
   return (
-    survey && (
     <PDFDownloadLink document={<MyDocument survey={survey}/>} fileName={survey.name}>
        {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Export PDF')}
      </PDFDownloadLink>
-     )
   )
 })
 

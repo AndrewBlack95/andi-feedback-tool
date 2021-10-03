@@ -8,7 +8,7 @@ const tagQuestion = null;
 const setTagQuestion = jest.fn();
 const index = 0;
 const noTags = {};
-const tags = { 'TagOne': { responses: [{ surveyId: '12345', question: 0, excluded: [] }] }, 'TagTwo': { responses: [] } }
+const tags = { 'TagOne': { responses: [{ survey: '12345', question: 0, excluded: [] }] }, 'TagTwo': { responses: [] } }
 const setTags = jest.fn();
 
 test('should render nothing when an empty object of tags is provided', () => {

@@ -2,16 +2,18 @@ import styled from 'styled-components';
 
 const StyledExportButton = styled.div`
   background-color: var(--primaryBlueColor);
-  color: var(--primaryWhiteColor);
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
+  border: 1px solid var(--primaryBlueColor);
   border-radius: 3px;
-  margin-top: auto;
+  color: var(--primaryWhiteColor);
+  display: flex;
+  font-weight: 700;
+  justify-content: center;
   margin-bottom: 10px;
+  margin-top: auto;
+  padding: 10px;
 
   &:hover {
+    border: 1px solid var(--primaryBlackColor);
     cursor: pointer;
   }
 `;

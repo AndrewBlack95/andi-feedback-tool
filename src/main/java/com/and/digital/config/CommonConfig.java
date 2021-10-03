@@ -18,7 +18,8 @@ public class CommonConfig {
     @Bean
     public RestTemplate restTemplate(final RestTemplateBuilder builder) {
         return builder.additionalInterceptors((request, body, execution) -> {
-            request.getHeaders().add(HttpHeaders.AUTHORIZATION, getBearerTokenFromRequest());
+            request.getHeaders().add(HttpHeaders.AUTHORIZATION, getBearerTokenFromRequest()
+            );
             return execution.execute(request, body);
         }).build();
     }

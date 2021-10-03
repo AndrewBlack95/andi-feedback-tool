@@ -4,14 +4,13 @@ import { useState, useEffect } from 'react';
 import AvailableTags from '../components/AvailableTags';
 import BackButton from '../components/BackButton';
 import ExportButton from '../components/ExportButton';
-import ExportModal from '../components/ExportModal';
+import ExportModalContainer from '../components/ExportModalContainer';
 import MainSection from '../components/MainSection';
 import NavBar from '../components/NavBar';
 import SidePanel from '../components/SidePanel';
 import SurveyLayout from '../components/SurveyLayout';
 
 import getSurveyDetails from '../api/get-survey-details';
-
 
 const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
   const history = useHistory();
@@ -44,7 +43,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
         </SidePanel>
         <SurveyLayout survey={survey} loading={loading} tags={tags} setTags={setTags} />
       </MainSection>
-      <ExportModal displayModal={displayModal} setDisplayModal={setDisplayModal} survey={survey} tags={tags}/>
+      <ExportModalContainer displayModal={displayModal} setDisplayModal={setDisplayModal} tags={tags} setTags={setTags} surveyId={selectedSurvey?.id} survey={survey}/>
     </>
   )
 };

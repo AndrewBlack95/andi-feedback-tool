@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-@ConfigurationProperties(prefix="survey-monkey")
+@ConfigurationProperties(prefix = "survey-monkey")
 @PropertySource("file:/opt/applications/SurveyMonkey.properties")
 public class SurveyMonkeyProperties {
     private String clientId;
@@ -18,5 +18,7 @@ public class SurveyMonkeyProperties {
     private String oAuthTokenUrl;
     private String successfulLoginRedirectUri;
     private String grantType;
-    private String getSurveysUrl;
+    private String getSurveysUri;
+    private String getSurveyDetailsUri;
+    private String getSurveyResponsesUri;
 }
