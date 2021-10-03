@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import React from 'react';
 import { Page, Text, Image, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import pic from "../pdf-page-1.png"
-import Questions from './Questions';
 
 const StyledExportPDFButton = styled.div`
   background-color: var(--primaryBlueColor);
@@ -48,41 +47,45 @@ const styles = StyleSheet.create({
   },
 });
 
-const MyDocument = ({survey}) => {
-  setTimeout(() => {
-    <Document>
-      <Page size="B1" style={styles.page}>
-          <View style={styles.section}>
-            {
-              survey?.questions?.map((question, index) => (<Text key={index}>{question.questionName}</Text>))
-            }
-          </View>
-      </Page>
-    </Document>
-}, 1)
-};
-
-const ExportPDFButton = ({survey, tags}) => {
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    setOpen(false);
-    setOpen(true);
-    return () => setOpen(false);
-  });
-
+const MyDocument = ({ survey }) => {
   return (
     <>
-      {open && (
-        <PDFDownloadLink document={<MyDocument survey={survey}/>} fileName={survey?.name}>
-          {({ blob, url, loading, error }) =>
-            loading ? 'Loading PDF...' : 'Export PDF'
-          }
-        </PDFDownloadLink>
-      )}
-    </>
-  );
-
+    <Document>
+    <Page object-fit="fill" style={styles.page} size="A4">
+      <View style={styles.view}>
+        <Image style={styles.image}  src={pic} alt="images" />
+      </View>
+    </Page>
+    <Page object-fit="fill" style={styles.page} size="A4">
+    <View style={styles.view}>
+        {survey?.questions.map((question, index) => {
+          return (
+              <Text key={index}>
+                {index + 1 + ". " + question.questionName}
+                {"\n"}
+                {question.answers.map((answer, index) => {
+                    return <Text key={index}>{"\n"}{answer.text}{answer.text && answer.score ? " - " : ""}{answer.score}</Text>
+                  })
+                }
+                {"\n\n"}
+              </Text>
+          )
+        })}
+    </View>
+    </Page>
+  </Document>
+  </>
+  )
 };
+
+export const ExportPDFButton = React.memo(({survey}) => {
+  return (
+    survey && (
+    <PDFDownloadLink document={<MyDocument survey={survey}/>} fileName={survey.name}>
+       {({ blob, url, loading, error }) => (loading ? 'Loading document...' : 'Export PDF')}
+     </PDFDownloadLink>
+     )
+  )
+})
 
 export default ExportPDFButton;
