@@ -1,27 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
-import styled from 'styled-components';
 import React from 'react';
 import { Page, Text, Image, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 import pic from "../pdf-page-1.png"
-
-const StyledExportPDFButton = styled.div`
-  background-color: var(--primaryBlueColor);
-  color: var(--primaryWhiteColor);
-  font-weight: 700;
-  display: flex;
-  justify-content: center;
-  padding: 10px;
-  border-radius: 3px;
-  margin-top: auto;
-  margin-bottom: 10px;
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
-  &:hover {
-    cursor: pointer;
-  }
-`;
 
 const styles = StyleSheet.create({
   page: {
@@ -44,6 +24,14 @@ const styles = StyleSheet.create({
     padding: 10,
     flexGrow: 1
   },
+  title: {
+    fontSize: 36,
+    textAlign: 'center'
+  },
+  text: {
+    fontSize: 12,
+    textAlign: 'left'
+  }
 });
 
 const MyDocument = ({ survey }) => {
@@ -55,24 +43,22 @@ const MyDocument = ({ survey }) => {
         <Image style={styles.image}  src={pic} alt="images" />
       </View>
     </Page>
-    <Page object-fit="fill" style={styles.page} size="A4">
-    {console.log(survey)}
-    <View style={styles.view}>
-        {survey?.questions.map((question, index) => {
-          return (
-              <Text key={index}>
-                {"Question " + (index + 1) + ". " + question.questionName}
-                {"\n"}
-                {question.answers.map((answer, index) => {
-                    return <Text key={index}>{"\n\n"}{"Response " + (index + 1) + ". "}{answer.text}{answer.text && answer.score ? " - " : ""}{answer.score}</Text>
-                  })
-                }
-                {"\n\n"}
-              </Text>
-          )
-        })}
-    </View>
-    </Page>
+    {survey?.questions.map((question, index) => {
+      return (
+        <Page object-fit="fill" style={styles.page} size="A4">
+          <View style={styles.view}>
+            <Text key={index} style={styles.title}>
+              {"Question " + (index + 1) + ". " + question.questionName}
+              {question.answers.map((answer, index) => {
+                  return <Text style={styles.text} key={index}>{"\n\n"}{"Response " + (index + 1) + ". "}{answer.text}{answer.text && answer.score ? " - " : ""}{answer.score}</Text>
+                })
+              }
+              {"\n\n"}
+            </Text>
+          </View>
+        </Page>
+      )
+    })}
   </Document>
   </>
   )
