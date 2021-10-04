@@ -3,13 +3,15 @@ import styled from 'styled-components';
 
 import Answers from './Answers';
 import AssignedTags from './AssignedTags';
+import ErrorMessage from './ErrorMessage';
 
 import dropdownIcon from '../dropdown-icon.png';
 
 const StyledQuestions = styled.div`
   margin-top: 20px;
   max-height: 75vh;
-  overflow-y: scroll;
+  height: 75vh;
+  overflow-y: auto;
 `;
 
 const StyledQuestion = styled.div`
@@ -69,22 +71,25 @@ const Questions = ({ surveyId, questions = [], tags, setTags }) => {
 
   return (
     <StyledQuestions>
-      {questions.map((question, index) => {
-        const selected = selectedQuestion === index;
-        return (
-          <Fragment key={`question_${index}`}>
-            <StyledQuestion onClick={() => handleSelectQuestion(index)} selected={selected}>
-              <StyledQuestionCount selected={selected}>{index + 1}</StyledQuestionCount>
-              <StyledQuestionContent>
-                <StyledQuestionName selected={selected}>{question.questionName}</StyledQuestionName>
-                <AssignedTags surveyId={surveyId} selected={selected} tagQuestion={tagQuestion} setTagQuestion={setTagQuestion} index={index} tags={tags} setTags={setTags} />
-              </StyledQuestionContent>
-              <StyledQuestionIcon src={dropdownIcon} selected={selected}></StyledQuestionIcon>
-            </StyledQuestion>
-            <Answers answers={question.answers} selected={selected} />
-          </Fragment>
-        )
-      })}
+      {questions.length === 0
+        ? <ErrorMessage>No valid questions found</ErrorMessage>
+        : questions.map((question, index) => {
+          const selected = selectedQuestion === index;
+          return (
+            <Fragment key={`question_${index}`}>
+              <StyledQuestion onClick={() => handleSelectQuestion(index)} selected={selected}>
+                <StyledQuestionCount selected={selected}>{index + 1}</StyledQuestionCount>
+                <StyledQuestionContent>
+                  <StyledQuestionName selected={selected}>{question.questionName}</StyledQuestionName>
+                  <AssignedTags surveyId={surveyId} selected={selected} tagQuestion={tagQuestion} setTagQuestion={setTagQuestion} index={index} tags={tags} setTags={setTags} />
+                </StyledQuestionContent>
+                <StyledQuestionIcon src={dropdownIcon} selected={selected}></StyledQuestionIcon>
+              </StyledQuestion>
+              <Answers answers={question.answers} selected={selected} />
+            </Fragment>
+          )
+        })
+      }
     </StyledQuestions>
   )
 };

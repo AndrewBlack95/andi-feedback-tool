@@ -69,12 +69,6 @@ const StyledAddTagButton = styled.button`
   }
 `;
 
-const generateNewTag = () => ({ 
-  color: Math.floor(Math.random()*16777215).toString(16), 
-  responses: [], 
-  feedback: {}
-});
-
 const AddNewTag = (props) => {
   const [newTag, setNewTag] = useState('');
   const textboxRef = useRef(null);
@@ -95,7 +89,11 @@ const AddNewTag = (props) => {
 
   const handleAddNewTag = () => {
     if (newTag !== '') {
-      props.setTags({ ...props.tags, [newTag]: generateNewTag() });
+      props.setTags({ ...props.tags, [newTag]: {
+        color: Math.floor(Math.random()*16777215).toString(16),
+        responses: props.tags[newTag]?.responses || [],
+        feedback: props.tags[newTag]?.feedback || {}
+      }});
       setNewTag('');
     }
     props.setAddNewTag(false);

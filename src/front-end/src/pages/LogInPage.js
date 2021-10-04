@@ -6,10 +6,9 @@ import LoginMessage from '../components/LoginMessage';
 import AssistanceMessage from '../components/AssistanceMessage';
 
 const LogInPage = () => {
-
   const handleLogin = () => {
-    window.open("https://api.surveymonkey.com/oauth/authorize?response_type=code&client_id=tY8QrxFXSTidag0HQT7yXg&redirect_uri=http://localhost:3000/auth", "_self");
-  }
+    window.open('https://api.surveymonkey.com/oauth/authorize?response_type=code&client_id=tY8QrxFXSTidag0HQT7yXg&redirect_uri=http://localhost:3000/auth', '_self');
+  };
 
   return (
     <>
