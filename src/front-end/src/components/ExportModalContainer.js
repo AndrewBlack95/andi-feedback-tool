@@ -16,14 +16,14 @@ const StyledExportContainer = styled.div`
   z-index: 200;
 `;
 
-const ExportModalContainer = ({ displayModal, setDisplayModal, tags, setTags, surveyId }) => {
+const ExportModalContainer = ({ displayModal, setDisplayModal, tags, setTags, surveyId, survey }) => {
   const handleClick = () => {
     setDisplayModal(false);
   };
 
   return (
     <StyledExportContainer displayModal={displayModal} onClick={handleClick}>
-      {displayModal && <ExportModal displayModal={displayModal} setDisplayModal={setDisplayModal} tags={tags} setTags={setTags} surveyId={surveyId} />}
+      {displayModal && <ExportModal displayModal={displayModal} setDisplayModal={setDisplayModal} tags={tags} setTags={setTags} surveyId={surveyId} survey={survey}/>}
     </StyledExportContainer>
   );
 }

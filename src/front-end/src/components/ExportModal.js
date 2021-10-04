@@ -79,7 +79,7 @@ const StyledModalButtons = styled.div`
   }
 `;
 
-const ExportModal = ({ displayModal, setDisplayModal, tags, setTags, surveyId }) => {
+const ExportModal = ({ displayModal, setDisplayModal, tags, setTags, surveyId, survey}) => {
   const [selectedTag, setSelectedTag] = useState(null);
   const [feedback, setFeedback] = useState('');
   const textAreaRef = useRef(null);
@@ -139,7 +139,7 @@ const ExportModal = ({ displayModal, setDisplayModal, tags, setTags, surveyId })
         <StyledTextArea ref={textAreaRef} disabled={tagNames.length === 0} onChange={handleAdditionalFeedback} value={feedback === undefined ? '' : feedback}></StyledTextArea>
       </StyledModalContent>
       <StyledModalButtons>
-        <ExportPDFButton selectedTag={selectedTag} setDisplayModal={setDisplayModal} />
+        <ExportPDFButton survey={survey}/>
         <ExportCancelButton setDisplayModal={setDisplayModal} />
       </StyledModalButtons>
     </StyledExportModal>
