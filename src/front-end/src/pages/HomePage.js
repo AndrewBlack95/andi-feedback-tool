@@ -16,8 +16,8 @@ const HomePage = ({ token, setToken, setSelectedSurvey }) => {
   useEffect(() => {
     getSurveys(token)
       .then(surveys => {
-        setSurveys(surveys)
-        setLoading(false)
+        setSurveys(surveys);
+        setLoading(false);
       })
     return () => setSurveys({});
   }, [token, setSurveys]);

@@ -1,5 +1,6 @@
 @font-face {
     font-family: 'BrownPro-Regular';
+    src: url('BrownPro-Regular.otf') format('opentype');
 }
 
 :root {

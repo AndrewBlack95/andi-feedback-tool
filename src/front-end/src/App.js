@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 
 import './App.css';
 
@@ -17,10 +17,16 @@ const App = () => {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/home"><HomePage token={token} setToken={setToken} setSelectedSurvey={setSelectedSurvey} /></Route>
-          <Route path="/survey"><SurveyPage token={token} setToken={setToken} selectedSurvey={selectedSurvey} tags={tags} setTags={setTags} /></Route>
+          <Route path="/home">
+            {token ? <HomePage token={token} setToken={setToken} setSelectedSurvey={setSelectedSurvey} /> : <Redirect to="/" />}
+          </Route>
+          <Route path="/survey">
+            {token ? <SurveyPage token={token} setToken={setToken} selectedSurvey={selectedSurvey} tags={tags} setTags={setTags} /> : <Redirect to="/" />}
+          </Route>
           <Route path="/auth"><AuthPage token={token} setToken={setToken}/></Route>
-          <Route path="/"><LogInPage /></Route>
+          <Route path="/"><LogInPage />
+            <Redirect to="/" />
+          </Route>
         </Switch>
       </div>
     </Router>
