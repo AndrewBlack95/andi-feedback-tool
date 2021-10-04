@@ -28,7 +28,6 @@ const StyledAnswer = styled.div`
 const StyledAnswerText = styled.div`
   background-color: var(--secondaryGreyColor);
   border-radius: 3px;
-  margin-right: 5px;
   opacity: 0;
   transition: all 400ms ease;
   width: 100%;
@@ -62,6 +61,7 @@ const StyledAnswerScore = styled.div`
   &.selected {
     height: 38px;
     line-height: 32px;
+    margin-left: 5px;
 
     & span {
       font-size: 22px;
@@ -102,7 +102,7 @@ const Answers = ({ answers, selected }) => {
     <>
       <StyledAnswers className={className}>
         {answers.length === 0 
-          ? <StyledAnswerText className={className} disabled={false}>No answers</StyledAnswerText>
+          ? <StyledAnswer className={className}><StyledAnswerText className={className} disabled={false}>No answers</StyledAnswerText></StyledAnswer>
           : answers.map((answer, index) => {
             return (
               <StyledAnswer key={`answer_${index}`} className={className}>

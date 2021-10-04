@@ -22,7 +22,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
   useEffect(() => {
     getSurveyDetails(token, selectedSurvey?.id)
       .then(survey => {
-        setSurvey(survey)
+        setSurvey(survey);
         setLoading(false);
       })
     return () => setSurvey({});
@@ -30,7 +30,7 @@ const SurveyPage = ({ token, setToken, selectedSurvey, tags, setTags }) => {
 
   if (!selectedSurvey) {
     history.push('/home');
-  }
+  };
 
   return (
     <>

@@ -5,10 +5,10 @@ const StyledWelcomeMessage = styled.div`
   font-size: 20px;
   font-weight: 700;
   padding: 40px 0;
-Align-Items: center;
-Justify-Content: centre;
+  align-items: center;
+  justify-content: centre;
 
-  span {
+  & span {
     font-size: 40px;
   }
 `;

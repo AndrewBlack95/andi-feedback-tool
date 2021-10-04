@@ -4,33 +4,144 @@
 //   name: 'Week 1 Bootcamp Survey - Scotland',
 //   questionCount: 2,
 //   questions: [
-//     { questionName: 'How good is Onboarding?', answers: [{ responseId: 'abcde_12345', value: '2/5', type: 'SCORE'}] },
-//     { questionName: 'Did you enjoy Club day?', answers: [
-//       { responseId: 'abcde_12345', value: 'Yes, it was absolutely great!', type: 'TEXT'}, 
-//       { responseId: 'abcde_12345', value: '5/5', type: 'SCORE'}, 
-//       { responseId: 'tada', value: '1/5', type: 'SCORE'},
-//       { responseId: 'tada1', value: '3/5', type: 'SCORE'},
-//       { responseId: 'tada2', value: '2/5', type: 'SCORE'},
-//       { responseId: 'tada3', value: '5/5', type: 'SCORE'},
-//       { responseId: 'tada4', value: '5/5', type: 'SCORE'},
-//       { responseId: 'tada5', value: '4/5', type: 'SCORE'},
-//       { responseId: 'tada6', value: '0/5', type: 'SCORE'},
-//       { responseId: 'tada7', value: '1/5', type: 'SCORE'},
-//       { responseId: 'tada8', value: '4/5', type: 'SCORE'},
-//       { responseId: 'tada9', value: '2/5', type: 'SCORE'},
-//       { responseId: 'tada0', value: '3/5', type: 'SCORE'},
-//       { responseId: 'tadaa', value: '1/5', type: 'SCORE'},
-//       { responseId: 'tadab', value: '5/5', type: 'SCORE'},
-//       { responseId: 'tada4', value: 'Thought it was brilliant!', type: 'TEXT'},
-//     ] },
-//     { questionName: 'What did you think of Client Fundamentals?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'What did you think of PD Fundamentals?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'What did you think of PA Fundamentals?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'What did you think of the Scrum session?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'What did you think of the socials?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'Overall how would you rate the onboarding experience?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'Did you feel that you were provided with the support you needed?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
-//     { questionName: 'Would you recommend AND Digital?', answers: [{ responseId: 'abcde_12345', value: 'Yes', type: 'TEXT'}] },
+//     {
+//       title: 'Hi there',
+//       questionType: 'MULTIPLE_CHOICE',
+//       responses: []
+//     },
+//     {
+//       title: '<em>Hi there</em><br></br><h1>Hahaha</h1><br /><p>Hmmmm</p>',
+//       questionType: 'MULTIPLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 0
+//           },
+//           {
+//             value: 'N/A - All of the above',
+//             score: 0
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1>',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     },
+//     {
+
+//       title: '<em>Hi there</em></br><h1>Hahaha</h1><br />What is your Name?',
+//       questionType: 'SINGLE_CHOICE',
+//       responses: [
+//         [
+//           {
+//             value: 'N/A - All of the above',
+//             score: 2
+//           }
+//         ]
+//       ]
+//     }
 //   ]
 // }
 
@@ -52,8 +163,23 @@ const transformSingleChoice = (responses) => {
 
 const transformMultipleChoice = (responses) => {
   return responses.map(responseForPerson => {
-    return [ ...new Set(responseForPerson.map(response => response.value)) ].join(', ')
+    return {
+      text: [ ...new Set(responseForPerson.map(response => response.value)) ].join(', '),
+      score: null
+    }
   })
+}
+
+const formatQuestionTitle = (title) => {
+  const lineBreaks = /<br>/g;
+  const endLineBreaks = /<\/?br ?\/?>/g;
+  const htmlTags = /<.*?>/g;
+  return title.replace(lineBreaks, '').replace(endLineBreaks, '. ').replace(htmlTags, '');
+}
+
+const questionContainsName = (title) => {
+  const name = /name/gi;
+  return title.match(name)
 }
 
 const transform = (data = {}) => {
@@ -68,22 +194,24 @@ const transform = (data = {}) => {
    name,
    questionCount,
    questions: questions.reduce((acc, question, index) => {
-    if (index === 0) {
-      return acc;
-    }
-    
     const { title, questionType, responses = [] } = question;
 
+    const questionName = formatQuestionTitle(title);
+
+    if (questionContainsName(questionName)) {
+      return acc;
+    }
+
     if (questionType === 'OPEN_ENDED') {
-      acc.push({ questionName: title, answers: transformOpenEnded(responses) });
+      acc.push({ questionName, answers: transformOpenEnded(responses) });
     }
 
     if (questionType === 'SINGLE_CHOICE') {
-      acc.push({ questionName: title, answers: transformSingleChoice(responses) });
+      acc.push({ questionName, answers: transformSingleChoice(responses) });
     }
     
     if (questionType === 'MULTIPLE_CHOICE') {
-      acc.push({ questionName: title, answers: transformMultipleChoice(responses) });
+      acc.push({ questionName, answers: transformMultipleChoice(responses) });
     }
 
     return acc;
